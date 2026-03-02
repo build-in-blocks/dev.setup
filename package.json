@@ -1,0 +1,29 @@
+{
+  "name": "@build-in-blocks/dev.setup",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "eslint.config.mjs",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1"
+  },
+  "homepage": "https://github.com/build-in-blocks/dev.setup#readme",
+  "bugs": {
+    "url": "https://github.com/build-in-blocks/dev.setup/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/build-in-blocks/dev.setup.git"
+  },
+  "license": "ISC",
+  "author": "Mary Obiagba"
+}
