@@ -24,6 +24,6 @@
     "type": "git",
     "url": "git+https://github.com/build-in-blocks/dev.setup.git"
   },
-  "license": "ISC",
+  "license": "AGPL-3.0",
   "author": "Mary Obiagba"
 }
