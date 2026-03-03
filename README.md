@@ -12,7 +12,11 @@
 
 #
 
-### Quick installation guide
+**Contributor guide:** See [docs.contributors README.md](https://github.com/build-in-blocks/dev.setup/blob/develop/docs.contributors/README.md)
+
+#
+
+### Quick user installation guide
 
 > [!NOTE]  
 > Also see user guide 👆🏽 for how to configure it to use your preferred settings instead.
