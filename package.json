@@ -8,11 +8,14 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "eslint:lint": "eslint ."
+    "eslint:lint": "eslint .",
+    "prettier:format": "prettier --write \"**/*.{js,ts,css,html}\""
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
     "eslint": "^10.0.2",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.1"
   },
