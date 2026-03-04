@@ -15,10 +15,7 @@ User installation and setup instructions can in the [root README.md](https://git
 
 #### Eslint errors
 - ❌ Inconsistent variable or function naming styles - default: camelCase ✅
-- ❌ Double quotes - default: single quotes ✅
-- ❌ Unrecognised tab indent spacing - default: 2 ✅
 - ❌ Unused variables
-- ❌ Trailing spaces
 
 #### Eslint warnings
 - ⚠️ `console.log` usage 

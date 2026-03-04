@@ -13,10 +13,7 @@ export default defineConfig(
     rules: {
       'no-console': 'warn',
       '@typescript-eslint/no-unused-vars': 'error',
-      'no-trailing-spaces': 'error',
-      'quotes': ['error', 'single'],
-      'indent': ['error', 2],
-      'camelcase': 'error'
-    }
+      camelcase: 'error',
+    },
   },
 );
