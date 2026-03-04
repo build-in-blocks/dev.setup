@@ -58,13 +58,69 @@ npm install -D @build-in-blocks/dev.setup
   ]);
   ````
 
-- Add eslint script command to your scripts in your project's package.json:
+
+#### 2. Prettier installation and setup
+
+- Install the same group of prettier-related package versions that our dev setup uses in your project:
+
+  ````
+  npm install -D prettier@^3.8.1 eslint-config-prettier@^10.1.8
+  ````
+
+- Create a prettier.config.js file at root of your project and add this setup:
+
+  ````
+  import basePrettier from '@build-in-blocks/dev.setup/prettier';
+
+  export default {
+    ...basePrettier,
+  };
+  ````
+
+
+#### 3. Package.json Script command setup and test
+
+- Add eslint and prettier script commands to your scripts in your project's package.json:
 
   ````
   "scripts": {
-      "lint": "eslint .",
-      // add other npm scripts your project needs as usual
+    "eslint:lint": "eslint .",
+    "prettier:format": "prettier --write \"**/*.{js,ts,css,html}\""
+    // add other npm scripts your project needs as usual
   },
   ````
 
-- Add code to the .ts files in your project as needed. Run the `npm run lint` script command at the root of your project to see eslint errors and warnings.
+- Create a .ts file in the folder specified in your eslint config i.e. `src` folder in this case. Copy and paste this sample code (just as it is) into the .ts file:
+
+  ````
+  const test = "";
+
+  const obj = {
+    a: 1,
+    b: 2,
+  };
+
+  const _name_Test = () => {
+    return '';
+  };
+
+    console.log(_name_Test);
+
+  export const addNumbers = (a: number, b: number): number => {
+    return a + b
+  }; 
+
+  console.log(addNumbers(4, 5))
+  ````
+
+ - You should already be able to see eslint + typescript intellisense working in your code editor i.e. wiggly red and yellow lines in the new .ts file - that is eslint notifying you about the code quality-related errors and warnings present in the code. If this eslint + typescript intellisense is not showing up for you, closing and reopening your code editor may fix it. In addition, run the eslint script command at the root of your project to see eslint errors and warnings in your terminal:
+  
+    ````
+    npm run eslint:lint
+    ````
+
+ - Run the prettier script command at the root of your project to see prettier fix code formatting-related inconsistencies:
+  
+    ````
+    npm run prettier:format
+    ````
