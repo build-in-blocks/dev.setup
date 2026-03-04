@@ -1,0 +1,17 @@
+# 1. Ignore everything by default
+*
+
+# 2. Allow directories
+!*/
+
+# 3. Specifically allow these FOUR types
+!*.js
+!*.ts
+!*.css
+!*.html
+
+# 4. Standard ignores
+node_modules/
+build/
+dist/
+coverage/
