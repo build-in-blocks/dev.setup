@@ -22,6 +22,28 @@ User installation and setup instructions can in the [root README.md](https://git
 
 # 
 
+### Preconfigured Prettier formatting settings
+
+````
+{
+  useTabs: false,
+  tabWidth: 2,
+  singleQuote: true,
+  trailingComma: 'all',
+  semi: true,
+  endOfLine: 'lf',
+};
+````
+
+**Meaning** 👉🏽 In addition to prettier's default settings, our preconfigured settings tells prettier to always format your code like so:
+- Use 2 spaces for indentation (instead of tabs)
+- Use single quote for strings
+- Add trailing comma to the last item in an object
+- End every single code statement with a semicolon
+- Ensure that every file ends with exactly one empty line
+
+# 
+
 ### Configuring your preferred settings
 
 #### 1. Updating Eslint settings
