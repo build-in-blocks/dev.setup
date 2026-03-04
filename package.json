@@ -4,6 +4,10 @@
   "description": "",
   "type": "module",
   "main": "eslint.config.mjs",
+  "exports": {
+    ".": "./eslint.config.mjs",
+    "./prettier": "./prettier.config.js"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
