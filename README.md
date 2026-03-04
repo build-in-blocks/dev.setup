@@ -50,7 +50,9 @@ npm install -D @build-in-blocks/dev.setup
   const TARGET_FILES = `${TARGET_FOLDER}/**/*.{ts,js,tsx}`;
 
   export default defineConfig([
-    // USE & UPDATE OUR PRECONFIGURED SETTINGS WITH TARGET FILES FIRST
+    //------------------------------------------------------------------
+    // USE OUR PRECONFIGURED SETTINGS & UPDATE IT WITH YOUR TARGET FILES
+    //------------------------------------------------------------------
     blocksDevSetupConfig.map(config => ({
       ...config,
       files: [TARGET_FILES],
@@ -73,6 +75,9 @@ npm install -D @build-in-blocks/dev.setup
   import basePrettier from '@build-in-blocks/dev.setup/prettier';
 
   export default {
+    //-------------------------------
+    // USE OUR PRECONFIGURED SETTINGS
+    //-------------------------------
     ...basePrettier,
   };
   ````
@@ -113,7 +118,7 @@ npm install -D @build-in-blocks/dev.setup
   console.log(addNumbers(4, 5))
   ````
 
- - You should already be able to see eslint + typescript intellisense working in your code editor i.e. wiggly red and yellow lines in the new .ts file - that is eslint notifying you about the code quality-related errors and warnings present in the code. If this eslint + typescript intellisense is not showing up for you, closing and reopening your code editor may fix it. In addition, run the eslint script command at the root of your project to see eslint errors and warnings in your terminal:
+ - You should already be able to see eslint + typescript intellisense working in your code editor i.e. red and yellow wiggly lines in the new .ts file - that is eslint notifying you about the code quality-related errors and warnings present in the code. In addition, run the eslint script command at the root of your project to see eslint errors and warnings in your terminal:
   
     ````
     npm run eslint:lint
@@ -124,3 +129,7 @@ npm install -D @build-in-blocks/dev.setup
     ````
     npm run prettier:format
     ````
+
+#### 4. Troubleshooting
+
+If the eslint + typescript intellisense is not showing red and yellow wiggle lines in your file or prettier formatting does not take effect, closing and reopening your code editor (or just the file you are editing) may fix it.

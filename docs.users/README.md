@@ -13,16 +13,34 @@ User installation and setup instructions can in the [root README.md](https://git
 
 ### Preconfigured Eslint alert settings
 
-#### Eslint errors
-- ❌ Inconsistent variable or function naming styles - default: camelCase ✅
-- ❌ Unused variables
-
 #### Eslint warnings
 - ⚠️ `console.log` usage 
+
+#### Eslint errors
+- ❌ Unused variables
+- ❌ Inconsistent variable or function naming styles - default: camelCase ✅
+
+````
+{
+  rules: {
+    'no-console': 'warn',
+    '@typescript-eslint/no-unused-vars': 'error',
+    camelcase: 'error',
+  },
+},
+
+````
 
 # 
 
 ### Preconfigured Prettier formatting settings
+
+In addition to prettier's default settings, our preconfigured settings tells prettier to always format your code like so:
+- Use 2 spaces for indentation (instead of tabs)
+- Use single quote for strings
+- Add trailing comma to the last item in an object
+- End every single code statement with a semicolon
+- Ensure that every file ends with exactly one empty line
 
 ````
 {
@@ -34,13 +52,6 @@ User installation and setup instructions can in the [root README.md](https://git
   endOfLine: 'lf',
 };
 ````
-
-**Meaning** 👉🏽 In addition to prettier's default settings, our preconfigured settings tells prettier to always format your code like so:
-- Use 2 spaces for indentation (instead of tabs)
-- Use single quote for strings
-- Add trailing comma to the last item in an object
-- End every single code statement with a semicolon
-- Ensure that every file ends with exactly one empty line
 
 # 
 
@@ -56,20 +67,23 @@ You can find more detailed guidance in eslint and typescript-eslint documentatio
 import { defineConfig } from 'eslint/config';
 import blocksDevSetupConfig from '@build-in-blocks/dev.setup';
 
-// NOTE: Change folder name to where your ts files reside
-const TARGET_FOLDER = 'src';
+const TARGET_FOLDER = 'src'; // NOTE: Change folder name to where your ts files reside
 const TARGET_FILES = `${TARGET_FOLDER}/**/*.{ts,js,tsx}`;
 
 export default defineConfig([
-  // 1. USE OUR PRECONFIGURED SETTINGS FIRST
+  //---------------------------------------------------------------------------
+  // 1. USE OUR PRECONFIGURED SETTINGS & UPDATE IT WITH YOUR TARGET FILES FIRST
+  //---------------------------------------------------------------------------
   blocksDevSetupConfig.map(config => ({
     ...config,
     files: [TARGET_FILES],
   })),
 
+  //--------------------------------------------------------
   // 2. THE OVERRIDE: Add your preferred lint alert settings
+  //--------------------------------------------------------
   {
-    files: [TARGET_FILES], // You also have to include target files here too.
+    files: [TARGET_FILES], // NOTE: You also have to include target files here too.
     rules: {
       // A. Turn of dev setup library's camelcase default
       'camelcase': 'off',
@@ -84,7 +98,28 @@ export default defineConfig([
           leadingUnderscore: 'allow',
         }
       ],
-    }
-  }
+    },
+  },
 ]);
+````
+
+#### 2. Updating Prettier settings
+
+You can find more detailed guidance in prettier's documentation. Here's an example of how to make your project use `tabs` with indent of `4`, instead of our "use spaces with index of 2" default:
+
+````
+import basePrettier from '@build-in-blocks/dev.setup/prettier';
+
+export default {
+  //----------------------------------------
+  // 1. USE OUR PRECONFIGURED SETTINGS FIRST
+  //----------------------------------------
+  ...basePrettier,
+
+  //-----------------------------------------
+  // 2. YOUR PREFERRED CONFIGURATION SETTINGS
+  //-----------------------------------------
+  useTabs: true,
+  tabWidth: 4,
+};
 ````
