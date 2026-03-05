@@ -134,9 +134,38 @@ npm install -D @build-in-blocks/dev.setup
 
  - You should already be able to see eslint + typescript intellisense working in your code editor i.e. red and yellow wiggly lines in the new .ts file - that is eslint notifying you about the code quality-related errors and warnings present in the code.
  - Add and commit your .ts file to git. You should see husky format just the file commited based on prettier settings, and prevent the commit due to eslint error alert.
+
+
+#### 6. GitHub Actions setup
+
+- Add `.github/workflow/app-node-ci.yml` file in your project, and paste the workflow code below in the file.
+
+  ````
+  name: App Node CI Quality Check
+  on:
+    pull_request:
+      branches: [ main, develop ]
+    push:
+      branches: [ main, develop ]
+
+  jobs:
+    call-shared-logic:
+      # -----------------------------------------------------------------
+      # This points to the shared library repository's "central" workflow
+      # -----------------------------------------------------------------
+      uses: build-in-blocks/dev.setup/.github/workflows/central-node-ci.yml@develop
+      with:
+        run_tests: true
+        # -------------------------------------------------
+        # You can pass multiple scripts separated by spaces
+        # -------------------------------------------------
+        extra_scripts: ""
+  ````
+
+ - Add the scripts you'd like to run in `extra_scripts` e.g. if you'd like the ci to run `build` and `e2e` npm scripts from your package.json, update the extra_scripts like so: `extra_scripts: "build e2e"`. The ci already runs some scripts by default - See [docs.users README.md](https://github.com/build-in-blocks/dev.setup/blob/develop/docs.users/README.md) for more info on this. 
+
  
- 
-#### 6. Eslint and prettier without husky 
+#### 7. Eslint and prettier without husky 
 
  - Run the eslint script command at the root of your project to see eslint errors and warnings in your terminal:
   
@@ -150,6 +179,6 @@ npm install -D @build-in-blocks/dev.setup
     npm run prettier:format
     ````
 
-#### 7. Troubleshooting
+#### 8. Troubleshooting
 
 If the eslint + typescript intellisense is not showing red and yellow wiggle lines in your file or prettier formatting does not take effect, closing and reopening your code editor (or just the file you are editing) may fix it.
