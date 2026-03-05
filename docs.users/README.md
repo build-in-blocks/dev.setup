@@ -69,7 +69,8 @@ In addition to prettier's default settings, our preconfigured settings tells pre
 > Change your linting script name to `eslint:lint` in the script section of your package.json, if you are using a different name. The CI running on your pull request will be able to detect your lint script and run it.
 -->
 
-The CI runs these npm scripts by default: `install` and `eslint:lint`.
+- The GitHub Actions CI runs these `npm` scripts by default: `install` and `eslint:lint`.
+- See [root README.md](https://github.com/build-in-blocks/dev.setup) for how to add the `npm` scripts that you have in your project, and that you want GitHub Actions to run.
 
 # 
 
