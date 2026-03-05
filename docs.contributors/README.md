@@ -46,6 +46,13 @@ Follow the instructions to fork and clone this repository locally unto your comp
     ```
     npm link
     ```
+
+    Complete the setup for husky and lint-staged:
+
+    ````
+    npx internal-husky-ls-init
+    ````
+
 - **For your TS app:** Open a terminal specifically for your typscript app, cd into the root of your typscript app.
 
     - **Step 1:** Follow the installation steps in the [root README.md](https://github.com/build-in-blocks/dev.setup), not from the beginning though; start from the **2. Eslint with typescript installation and setup** section (and continue till the end).

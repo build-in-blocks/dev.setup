@@ -61,7 +61,7 @@ npm install -D @build-in-blocks/dev.setup
   ````
 
 
-#### 2. Prettier installation and setup
+#### 3. Prettier installation and setup
 
 - Install the same group of prettier-related package versions that our dev setup uses in your project:
 
@@ -82,15 +82,29 @@ npm install -D @build-in-blocks/dev.setup
   };
   ````
 
+#### 4. Husky + lint-staged installation and setup
 
-#### 3. Package.json Script command setup and test
+- Install the same husky and lint-staged package versions that our dev setup uses in your project:
 
-- Add eslint and prettier script commands to your scripts in your project's package.json:
+  ````
+  npm i -D husky@^9.1.7 lint-staged@^16.3.2
+  ````
+
+- Initialize husky and lint-staged:
+
+  ````
+  npx husky-ls-config-init
+  ````
+
+#### 5. Package.json Script command setup and test
+
+- Add eslint, prettier and husky script commands to your scripts in your project's package.json:
 
   ````
   "scripts": {
     "eslint:lint": "eslint .",
-    "prettier:format": "prettier --write \"**/*.{js,ts,css,html}\""
+    "prettier:format": "prettier --write \"**/*.{js,ts,css,html}\"",
+    "prepare": "husky"
     // add other npm scripts your project needs as usual
   },
   ````
@@ -118,7 +132,13 @@ npm install -D @build-in-blocks/dev.setup
   console.log(addNumbers(4, 5))
   ````
 
- - You should already be able to see eslint + typescript intellisense working in your code editor i.e. red and yellow wiggly lines in the new .ts file - that is eslint notifying you about the code quality-related errors and warnings present in the code. In addition, run the eslint script command at the root of your project to see eslint errors and warnings in your terminal:
+ - You should already be able to see eslint + typescript intellisense working in your code editor i.e. red and yellow wiggly lines in the new .ts file - that is eslint notifying you about the code quality-related errors and warnings present in the code.
+ - Add and commit your .ts file to git. You should see husky format just the file commited based on prettier settings, and prevent the commit due to eslint error alert.
+ 
+ 
+#### 6. Eslint and prettier without husky 
+
+ - Run the eslint script command at the root of your project to see eslint errors and warnings in your terminal:
   
     ````
     npm run eslint:lint
@@ -130,6 +150,6 @@ npm install -D @build-in-blocks/dev.setup
     npm run prettier:format
     ````
 
-#### 4. Troubleshooting
+#### 7. Troubleshooting
 
 If the eslint + typescript intellisense is not showing red and yellow wiggle lines in your file or prettier formatting does not take effect, closing and reopening your code editor (or just the file you are editing) may fix it.
