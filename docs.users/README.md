@@ -58,14 +58,16 @@ In addition to prettier's default settings, our preconfigured settings tells pre
 ### Preconfigured Husky + lint-staged settings
 
 - Run eslint and prettier anytime a developer tries to commit code to git.
-- Prevent revent code commit to git when any of the code linting and formatting requirements are not met.
+- Prevent code commit to git when any of the code linting and formatting requirements are not met.
 
 # 
 
 ### Preconfigured GitHub Actions settings
 
+<!--
 > [!NOTE]  
 > Change your linting script name to `eslint:lint` in the script section of your package.json, if you are using a different name. The CI running on your pull request will be able to detect your lint script and run it.
+-->
 
 The CI runs these npm scripts by default: `install` and `eslint:lint`.
 
