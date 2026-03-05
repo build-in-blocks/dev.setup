@@ -1,0 +1,19 @@
+{
+  "projectName": "dev.setup",
+  "projectOwner": "build-in-blocks",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributorsPerLine": 6,
+  "contributorsSortAlphabetically": true,
+  "skipCi": true,
+  "contributors": [
+
+  ],
+  "commitConvention": "angular",
+  "commitType": "docs"
+}
