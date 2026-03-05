@@ -162,7 +162,9 @@ npm install -D @build-in-blocks/dev.setup
         extra_scripts: ""
   ````
 
- - Add the scripts you'd like to run in `extra_scripts` e.g. if you'd like the ci to run `build` and `e2e` npm scripts from your package.json, update the extra_scripts like so: `extra_scripts: "build e2e"`. The ci already runs some scripts by default - See [docs.users README.md](https://github.com/build-in-blocks/dev.setup/blob/develop/docs.users/README.md) for more info on this. 
+ - Add the scripts you'd like to run in `extra_scripts` e.g. if you'd like the ci to run `build` and `e2e` npm scripts from your package.json, update the extra_scripts like so: `extra_scripts: "build e2e"`. The ci already runs some scripts by default - See [docs.users README.md](https://github.com/build-in-blocks/dev.setup/blob/develop/docs.users/README.md) for more info on this.
+
+ - Once you push to or make a pull request that points to `develop` branch or `main` branch, you should see the CI running on the pull request. 
 
  
 #### 7. Eslint and prettier without husky 
