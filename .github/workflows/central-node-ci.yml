@@ -1,0 +1,52 @@
+name: Central Node CI Quality Check
+on:
+  # --------------------------------------------------------------------
+  # 1. This lets user apps that use dev.setup library call this workflow
+  # --------------------------------------------------------------------
+  workflow_call:
+    inputs:
+      # run_tests:
+      #   type: boolean
+      #   default: true # special treatment for npm test though it's not the only compulsory one
+      extra_scripts:
+        description: 'Additional npm scripts to run from user app (e.g., "build", "e2e")'
+        type: string
+        default: '' # Default to nothing
+  # ------------------------------------------------------
+  # 2. dev.setup library will check ITSELF on these events
+  # ------------------------------------------------------
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['20.x', '21.x', '22.x', '23.x', '24.x', '25.x']
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      # Shared: Runs for both shared library and user app
+      - run: npm install
+      - run: npm run eslint:lint
+
+      # Shared & Compulsory: Standard Test - Runs for both library and user app if script exists
+      # - name: Run Tests
+      #   if: ${{ inputs.run_tests }}
+      #   run: npm run jest:test
+
+      # The plug-in step: Runs whatever the user app sent over
+      - name: Run Extra Scripts
+        if: ${{ inputs.extra_scripts != '' }}
+        run: |
+          for script in ${{ inputs.extra_scripts }}; do
+            npm run $script
+          done
