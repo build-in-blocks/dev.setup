@@ -1,7 +1,7 @@
 {
   "name": "@build-in-blocks/dev.setup",
   "version": "1.0.0",
-  "description": "",
+  "description": "Code linting, formatting, pre-commit hook and GitHub actions (including node version compatiblity check) development environment setup for your typescript code repository",
   "type": "module",
   "main": "eslint.config.mjs",
   "bin": {
@@ -32,12 +32,38 @@
   },
   "homepage": "https://github.com/build-in-blocks/dev.setup#readme",
   "bugs": {
-    "url": "https://github.com/build-in-blocks/dev.setup/issues"
+    "url": "https://github.com/build-in-blocks/product-issue-reports/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/build-in-blocks/dev.setup.git"
   },
   "license": "AGPL-3.0",
-  "author": "Mary Obiagba"
+  "author": "Mary Obiagba",
+    "contributors": [
+    "Find list of contributors in project README: https://github.com/build-in-blocks/dev.setup?tab=readme-ov-file#contributors"
+  ],
+  "keywords": [
+    "eslint",
+    "prettier",
+    "husky",
+    "lint-staged",
+    "github actions",
+    "pre-commit hook",
+    "code quality",
+    "code formatting",
+    "typescript",
+    "javascript",
+    "node",
+    "config",
+    "setup",
+    "dev environment"
+  ],
+  "files": [
+    "bin/",
+    "eslint.config.mjs",
+    "prettier.config.js",
+    "lint-staged.config.js",
+    "README.md"
+  ]
 }
