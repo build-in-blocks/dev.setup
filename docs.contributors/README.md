@@ -11,6 +11,12 @@ Read our code of conduct before you start contributing: https://resources.collab
 
 #
 
+### Project board
+
+Find issue tickets to work on through our project board: https://github.com/orgs/build-in-blocks/projects/2
+
+#
+
 ### Library compatiblity
 
 Compatible `Node.js` version(s) have been specified in the [root README.md](https://github.com/build-in-blocks/dev.setup) of this repository.
