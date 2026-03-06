@@ -5,9 +5,9 @@ on:
   # --------------------------------------------------------------------
   workflow_call:
     inputs:
-      # run_tests:
-      #   type: boolean
-      #   default: true # special treatment for npm test though it's not the only compulsory one
+      run_tests:
+        type: boolean
+        default: true # special treatment for npm test though it's not the only compulsory one
       extra_scripts:
         description: 'Additional npm scripts to run from user app (e.g., "build", "e2e")'
         type: string
@@ -39,14 +39,15 @@ jobs:
       - run: npm run eslint:lint
 
       # Shared & Compulsory: Standard Test - Runs for both library and user app if script exists
-      # - name: Run Tests
-      #   if: ${{ inputs.run_tests }}
-      #   run: npm run jest:test
+      - name: Run Tests
+        # Logic: Run if specifically requested via input OR if running internally on library push/PR
+        if: ${{ inputs.run_tests || github.event_name != 'workflow_call' }}
+        run: npm run jest:test --if-present
 
       # The plug-in step: Runs whatever the user app sent over
       - name: Run Extra Scripts
         if: ${{ inputs.extra_scripts != '' }}
         run: |
           for script in ${{ inputs.extra_scripts }}; do
-            npm run $script
+            npm run $script --if-present
           done
