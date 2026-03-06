@@ -11,6 +11,13 @@ Read our code of conduct before you start contributing: https://resources.collab
 
 #
 
+### Prerequisites
+
+Regardless of work experience level, interested code contributors must first complete the [Git & GitHub Workflow Series by **@collabocate-osc**](https://github.com/orgs/collabocate-osc/discussions?discussions_q=is%3Aopen+label%3A%22topic%3A+git+%26+github+collab%22), before making an attempt to work on issue tickets in any **@build-in-blocks** repository.
+
+
+#
+
 ### Project board
 
 Find issue tickets to work on through our project board: https://github.com/orgs/build-in-blocks/projects/2
