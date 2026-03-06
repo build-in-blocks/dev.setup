@@ -4,7 +4,7 @@
 
 #
 
-**Description:** Code linting, formatting, pre-commit hook and GitHub actions (including node version compatiblity check) development environment setup for your `typescript` code repository.
+**Description:** Code linting, formatting, pre-commit hook and GitHub actions development environment setup for your `typescript` code repository.
 
 #
 
