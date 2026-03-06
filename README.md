@@ -4,6 +4,10 @@
 
 #
 
+**Description:** Code linting, formatting, pre-commit hook and GitHub actions (including node version compatiblity check) development environment setup for your `typescript` code repository.
+
+#
+
 **How it works:** Using code quality checks from `eslint`, `husky` works with `lint-staged` to prevent code that don't meet your code quality requirements, from being commited to git and pushed to your repository's remote - it also formats your code with `prettier` based on your code formatting preferences at this point. `GitHub Actions` then runs your code quality and node version compatibilty checks on your pull requests, on push or on merge to your `develop` and/or `main` branch.
 
 #
