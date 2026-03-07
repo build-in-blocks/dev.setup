@@ -188,7 +188,7 @@ npm install -D @build-in-blocks/dev.setup
       # -----------------------------------------------------------------
       # This points to the shared library repository's "central" workflow
       # -----------------------------------------------------------------
-      uses: build-in-blocks/dev.setup/.github/workflows/central-node-ci.yml@v1.0.1
+      uses: build-in-blocks/dev.setup/.github/workflows/central-blocks-ci.yml@v1.0.1
       with:
         run_tests: true
         # -------------------------------------------------
@@ -197,7 +197,7 @@ npm install -D @build-in-blocks/dev.setup
         extra_scripts: ""
   ````
   > [!IMPORTANT]  
-  > Make sure the version used in the .yml file's `call-shared-logic` in `uses: build-in-blocks/dev.setup/.github/workflows/central-node-ci.yml@v[VERSION_NUMBER_HERE]`, is the same as the version of the `@build-in-blocks/dev.setup` package in your `package.json` file.
+  > Make sure the version used in the .yml file's `call-shared-logic` in `uses: build-in-blocks/dev.setup/.github/workflows/central-blocks-ci.yml@v[VERSION_NUMBER_HERE]`, is the same as the version of the `@build-in-blocks/dev.setup` package in your `package.json` file.
 
  - Add the scripts you'd like to run in `extra_scripts` e.g. if you'd like the CI to run `build` and `e2e` npm scripts from your `package.json` file, update the extra_scripts like so:
 

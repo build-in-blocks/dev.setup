@@ -1,4 +1,4 @@
-name: Central Node CI Quality Check
+name: Central Blocks CI
 on:
   # --------------------------------------------------------------------
   # 1. This lets user apps that use dev.setup library call this workflow
