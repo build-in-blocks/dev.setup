@@ -1,6 +1,6 @@
 {
   "name": "@build-in-blocks/dev.setup",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Code linting, formatting, pre-commit hook and GitHub Actions Continuous Integration (CI) (including node version compatiblity check) development environment setup for your typescript code repository",
   "type": "module",
   "main": "eslint.config.mjs",
