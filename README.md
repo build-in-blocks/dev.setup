@@ -210,7 +210,7 @@ npm install -D @build-in-blocks/dev.setup
     ````
 
     > [!NOTE]  
-    > The ci already runs some scripts by default - See [docs.users README.md](https://github.com/build-in-blocks/dev.setup/blob/develop/docs.users/README.md) for more info on this.
+    > The GitHub Actions CI already runs some scripts by default - See [docs.users README.md](https://github.com/build-in-blocks/dev.setup/blob/develop/docs.users/README.md) for more info on this.
 
 - Add and commit your setup files. Once you push to or make a pull request that points to `develop` branch or `main` branch, you should see the CI running on the pull request, on push and on merge. 
 
