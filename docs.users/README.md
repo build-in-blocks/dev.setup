@@ -68,7 +68,7 @@ In addition to `prettier`'s default settings, our preconfigured settings tells `
 > Let your linting script name remain as `eslint:lint` in the script section of your `package.json`. This way, the CI running on your pull requests, on push and on merge, will be able to detect your lint script and run it.
 
 > [!NOTE]  
-> The supported `Node.js` versions for installing and running your project, is the same as the what's on our package's [root README.md](https://github.com/build-in-blocks/dev.setup). Our `central-node-ci.yml` however, runs a wider range of `Node.js` versions (You'll notice this on the CI that runs on your project repository's pull requests, on push and on merge) - which is how we are able to detect the supported `Node.js` versions for both our package and your project.
+> The supported `Node.js` versions for installing and running your project, is the same as the what's on our package's [root README.md](https://github.com/build-in-blocks/dev.setup). Our `central-blocks-ci.yml` however, runs a wider range of `Node.js` versions (You'll notice this on the CI that runs on your project repository's pull requests, on push and on merge) - which is how we are able to detect the supported `Node.js` versions for both our package and your project.
 
 - The GitHub Actions CI runs these `npm` scripts in your project by default: `install` and `eslint:lint`.
 - See [root README.md](https://github.com/build-in-blocks/dev.setup) for how to add other `npm` scripts that you have in your project, and that you want GitHub Actions to run too.
