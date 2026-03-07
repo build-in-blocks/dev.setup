@@ -10,7 +10,7 @@
   },
   "exports": {
     ".": "./eslint.config.mjs",
-    "./prettier": "./prettier.config.js"
+    "./prettier": "./prettier.config.mjs"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -72,7 +72,7 @@
   "files": [
     "bin/",
     "eslint.config.mjs",
-    "prettier.config.js",
+    "prettier.config.mjs",
     "lint-staged.config.js",
     "README.md"
   ]
