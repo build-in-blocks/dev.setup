@@ -1,7 +1,7 @@
 
 # User guide: @build-in-blocks/dev.setup package installation, setup and usage
 
-**@build-in-blocks/dev.setup** provides TS development environment setup and comes with preconfigured settings. It helps to automate code compatibilty, quality and formatting checks within your typescript code repository's Git workflow, ensuring that only clean, consistent code is committed to the repository. It also includes GitHub actions setup for running these checks on the contributions submitted to your repository, by your open source contributors or work colleagues. Of course, you can configure it to use your preferred settings too.
+**@build-in-blocks/dev.setup** provides TS development environment setup and comes with preconfigured settings. It helps to automate code compatibilty, quality and formatting checks within your typescript code repository's Git workflow, ensuring that only clean, consistent code is committed to the repository. It also includes GitHub Actions Continuous Integration (CI) setup for running these checks on the contributions submitted to your repository, by your open source contributors or work colleagues. Of course, you can configure it to use your preferred settings too.
 
 #
 
@@ -35,7 +35,7 @@ User installation and setup instructions can in the [root README.md](https://git
 
 ### Preconfigured Prettier formatting settings
 
-In addition to prettier's default settings, our preconfigured settings tells prettier to always format your code like so:
+In addition to `prettier`'s default settings, our preconfigured settings tells `prettier` to always format your code like so:
 - Use 2 spaces for indentation (instead of tabs)
 - Use single quote for strings
 - Add trailing comma to the last item in an object
@@ -57,20 +57,21 @@ In addition to prettier's default settings, our preconfigured settings tells pre
 
 ### Preconfigured Husky + lint-staged settings
 
-- Run eslint and prettier anytime a developer tries to commit code to git.
+- Run `eslint` and `prettier` anytime a developer tries to commit code to git.
 - Prevent code commit to git when any of the code linting and formatting requirements are not met.
 
 # 
 
 ### Preconfigured GitHub Actions settings
 
-<!--
 > [!NOTE]  
-> Change your linting script name to `eslint:lint` in the script section of your package.json, if you are using a different name. The CI running on your pull request will be able to detect your lint script and run it.
--->
+> Let your linting script name remain as `eslint:lint` in the script section of your `package.json`. This way, the CI running on your pull requests, on push and on merge, will be able to detect your lint script and run it.
 
-- The GitHub Actions CI runs these `npm` scripts by default: `install` and `eslint:lint`.
-- See [root README.md](https://github.com/build-in-blocks/dev.setup) for how to add the `npm` scripts that you have in your project, and that you want GitHub Actions to run.
+> [!NOTE]  
+> The supported `Node.js` versions for installing and running your project, is the same as the what's on our package's [root README.md](https://github.com/build-in-blocks/dev.setup). Our `central-node-ci.yml` however, runs a wider range of `Node.js` versions (You'll notice this on the CI that runs on your project repository's pull requests, on push and on merge) - which is how we are able to detect the supported `Node.js` versions for both our package and your project.
+
+- The GitHub Actions CI runs these `npm` scripts in your project by default: `install` and `eslint:lint`.
+- See [root README.md](https://github.com/build-in-blocks/dev.setup) for how to add other `npm` scripts that you have in your project, and that you want GitHub Actions to run too.
 
 # 
 
@@ -78,7 +79,7 @@ In addition to prettier's default settings, our preconfigured settings tells pre
 
 #### 1. Updating Eslint settings
 
-You can find more detailed guidance in eslint and typescript-eslint documentation. Here's an example of how to make your project use `snake_case`, instead of our default `camelcase` naming convention for variables and functions:
+You can find more detailed guidance in `eslint` and `typescript-eslint` documentation. Here's an example of how to make your project use `snake_case`, instead of our default `camelcase` naming convention for variables and functions:
 
 ````
 // @ts-check
@@ -124,7 +125,7 @@ export default defineConfig([
 
 #### 2. Updating Prettier settings
 
-You can find more detailed guidance in prettier's documentation. Here's an example of how to make your project use `tabs` with indent of `4`, instead of our "use spaces with index of 2" default:
+You can find more detailed guidance in `prettier` documentation. Here's an example of how to make your project use `tabs` with indent of `4`, instead of our "use spaces with index of 2" default:
 
 ````
 import basePrettier from '@build-in-blocks/dev.setup/prettier';
