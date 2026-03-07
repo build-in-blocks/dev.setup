@@ -8,7 +8,7 @@
 
 #
 
-**How it works:** Using code quality checks from `eslint`, `husky` works with `lint-staged` to prevent code that don't meet your code quality requirements, from being commited to git and pushed to your repository's remote - it also formats your code with `prettier` based on your code formatting preferences at this point. `GitHub Actions` then runs your code quality and node version compatibilty checks on your pull requests, on push or on merge to your `develop` and/or `main` branch.
+**How it works:** Using code quality checks from `eslint`, `husky` works with `lint-staged` to prevent code that don't meet your code quality requirements, from being commited to git and pushed to your repository's remote - it also formats your code with `prettier` based on your code formatting preferences at this point. `GitHub Actions` then runs the code quality and node version compatibilty checks on pull requests, on push or on merge to your repository's `develop` and/or `main` branch. Ensuring code from all code contributors working on your project pass through the quality checks that you've configured.
 
 #
 
@@ -45,13 +45,13 @@ npm install -D @build-in-blocks/dev.setup
   npm install -D eslint@^10.0.2 @eslint/js@^10.0.1 typescript@^5.9.3 typescript-eslint@^8.56.1
   ````
 
-- Create an eslint.config.mjs file at root of your project and add this setup:
+- Create a `eslint.config.mjs` file at root of your project and add this setup:
 
   ````
   // @ts-check
 
   import { defineConfig } from 'eslint/config';
-  import blocsDevSetupConfig from '@build-in-blocks/dev.setup';
+  import blocksDevSetupConfig from '@build-in-blocks/dev.setup';
 
   // NOTE: Change folder name to where your ts files reside
   const TARGET_FOLDER = 'src';
@@ -77,7 +77,7 @@ npm install -D @build-in-blocks/dev.setup
   npm install -D prettier@^3.8.1 eslint-config-prettier@^10.1.8
   ````
 
-- Create a prettier.config.js file at root of your project and add this setup:
+- Create a `prettier.config.js` file at root of your project and add this setup:
 
   ````
   import basePrettier from '@build-in-blocks/dev.setup/prettier';
@@ -89,8 +89,12 @@ npm install -D @build-in-blocks/dev.setup
     ...basePrettier,
   };
   ````
+- Use `"type": "module"` in your `package.json` file. If you don't use it, you may run into errors as shown in the **troubleshooting** section at the end of this installation guide.
 
 #### 4. Husky + lint-staged installation and setup
+
+> [!NOTE]  
+> **Before you proceed with husky setup:** Your project must be a git repository, and you must have made at least one commit to git. If you have done that already, then proceed to follow the husky-related step below. If it's not a git repository, first run the `git init` command at the root of your project to initialize it as a git repository, add and commit one or more files to git as needed, then proceed to follow the husky-related steps below.
 
 - Install the same husky and lint-staged package versions that our dev setup uses in your project:
 
@@ -104,20 +108,13 @@ npm install -D @build-in-blocks/dev.setup
   npx husky-ls-config-init
   ````
 
-#### 5. Package.json Script command setup and test
+  > [!NOTE]  
+  > After doing the above, husky will automatically add the `"prepare": "husky"` npm script command to your `package.json` file. Do not remove this script command, this is what husky will use to automate the process.
 
-- Add eslint, prettier and husky script commands to your scripts in your project's package.json:
 
-  ````
-  "scripts": {
-    "eslint:lint": "eslint .",
-    "prettier:format": "prettier --write \"**/*.{js,ts,css,html}\"",
-    "prepare": "husky"
-    // add other npm scripts your project needs as usual
-  },
-  ````
+#### 5. Git commit test - Check that what you've setup so far works
 
-- Create a .ts file in the folder specified in your eslint config i.e. `src` folder in this case. Copy and paste this sample code (just as it is) into the .ts file:
+- **Add this incorrectly formatted code:** Create a `.ts` file (in the `TARGET_FOLDER` that you specified in your eslint config i.e. `src` folder in this case). Copy and paste this sample code (just as it is) into the `.ts` file (don't make any corrections to the code):
 
   ````
   const test = "";
@@ -140,16 +137,47 @@ npm install -D @build-in-blocks/dev.setup
   console.log(addNumbers(4, 5))
   ````
 
- - You should already be able to see eslint + typescript intellisense working in your code editor i.e. red and yellow wiggly lines in the new .ts file - that is eslint notifying you about the code quality-related errors and warnings present in the code.
- - Add and commit your .ts file to git. You should see husky format just the file commited based on prettier settings, and prevent the commit due to eslint error alert.
+- **Check that eslint errors prevent commit:** Add and commit your `.ts` file to git. You should see that it prevents the commit due to `eslint` error alert in the file(s) committed to git.
+
+- **Check that prettier formats code on commit:** Only fix the eslint errors shown in your terminal, leave any other inconsistent formatting. Add and commit your `.ts` file to git. You should see that the code in the file(s) commited to git has been formatted properly by `prettier`, and the commit is also successful.
+
+- **Eslint + typescript intellisense:** Additinally, you should already be able to see `eslint` + `typescript` intellisense working in your code editor i.e. red and yellow wiggly lines in the new `.ts` file - that is `eslint` notifying you about the code quality-related errors and warnings present in the code. If the intellisense isn't showing for you, see the **troubleshooting** section at the end of this installation guide.
 
 
-#### 6. GitHub Actions setup
+#### 6. Running Eslint and prettier manually without husky
 
-- Add `.github/workflow/app-node-ci.yml` file in your project, and paste the workflow code below in the file.
+- Add eslint and prettier script commands to your scripts in your project's `package.json` file:
 
   ````
-  name: App Node CI Quality Check
+  "scripts": {
+    "eslint:lint": "eslint .",
+    "prettier:format": "prettier --write \"**/*.{js,ts,css,html}\""
+    // your other npm scripts in your project goes here as usual
+  },
+  ````
+
+  > [!NOTE]  
+  > The presence of `eslint:lint` script command in your package.json will be useful later on, when GitHub actions runs on your pull requests, on push and on merge.
+
+ - Run the eslint script command at the root of your project to see eslint errors and warnings for all affected files in your terminal:
+  
+    ````
+    npm run eslint:lint
+    ````
+
+ - Run the prettier script command at the root of your project to see prettier fix code formatting-related inconsistencies for all affected files:
+  
+    ````
+    npm run prettier:format
+    ````
+
+
+#### 7. GitHub Actions setup
+
+- Add `.github/workflows/blocks-ci.yml` file in your project, and paste the workflow code below into the file:
+
+  ````
+  name: Blocks CI
   on:
     pull_request:
       branches: [ main, develop ]
@@ -161,7 +189,7 @@ npm install -D @build-in-blocks/dev.setup
       # -----------------------------------------------------------------
       # This points to the shared library repository's "central" workflow
       # -----------------------------------------------------------------
-      uses: build-in-blocks/dev.setup/.github/workflows/central-node-ci.yml@develop
+      uses: build-in-blocks/dev.setup/.github/workflows/central-node-ci.yml@v1.0.1
       with:
         run_tests: true
         # -------------------------------------------------
@@ -169,29 +197,36 @@ npm install -D @build-in-blocks/dev.setup
         # -------------------------------------------------
         extra_scripts: ""
   ````
+  > [!IMPORTANT]  
+  > Make sure the version used in the .yml file's `call-shared-logic` in `uses: build-in-blocks/dev.setup/.github/workflows/central-node-ci.yml@v[VERSION_NUMBER_HERE]`, is the same as the version of the `@build-in-blocks/dev.setup` package in your `package.json` file.
 
- - Add the scripts you'd like to run in `extra_scripts` e.g. if you'd like the ci to run `build` and `e2e` npm scripts from your package.json, update the extra_scripts like so: `extra_scripts: "build e2e"`. The ci already runs some scripts by default - See [docs.users README.md](https://github.com/build-in-blocks/dev.setup/blob/develop/docs.users/README.md) for more info on this.
+ - Add the scripts you'd like to run in `extra_scripts` e.g. if you'd like the CI to run `build` and `e2e` npm scripts from your `package.json` file, update the extra_scripts like so:
 
- - Once you push to or make a pull request that points to `develop` branch or `main` branch, you should see the CI running on the pull request. Note: You can update the name of the branches, remove or add as you see fit, based on what branch names your repository uses.
+    ````
+      # -------------------------------------------------
+      # You can pass multiple scripts separated by spaces
+      # -------------------------------------------------
+      extra_scripts: "build e2e"
+    ````
 
+    > [!NOTE]  
+    > The ci already runs some scripts by default - See [docs.users README.md](https://github.com/build-in-blocks/dev.setup/blob/develop/docs.users/README.md) for more info on this.
+
+- Add and commit your setup files. Once you push to or make a pull request that points to `develop` branch or `main` branch, you should see the CI running on the pull request, on push and on merge. 
+
+  > [!NOTE]  
+  > You can update the name of the branches in the `.yml` file, remove or add as you see fit, based on what branch names your repository uses.
+
+
+#### 8. Extra notes
+
+Make sure to add and commit all your setup files to git, and push/merge it to your remote on GitHub. Once you do this, any contributor who clones your project's repository (or pull these new changes) will automatically have these settings work for them. All they have to do is clone the repository and install the packages in your project's `package.json` as usual - that's all!
  
-#### 7. Eslint and prettier without husky 
 
- - Run the eslint script command at the root of your project to see eslint errors and warnings in your terminal:
-  
-    ````
-    npm run eslint:lint
-    ````
+#### 9. Troubleshooting
 
- - Run the prettier script command at the root of your project to see prettier fix code formatting-related inconsistencies:
-  
-    ````
-    npm run prettier:format
-    ````
-
-#### 8. Troubleshooting
-
-If the eslint + typescript intellisense is not showing red and yellow wiggle lines in your file or prettier formatting does not take effect, closing and reopening your code editor (or just the file you are editing) may fix it.
+- **Eslint + typescript intellisense:** If the `eslint` + `typescript` intellisense is not showing red and yellow wiggle lines in your file, first check that you have `eslint` extension installed in your code editor (that is, if you are using VScode). If you have the extension and it still doesn't show up, closing and reopening your code editor (or just the file you are editing) may fix it.
+- **prettier --write: Warning: Failed to load the ES module**: To solve this, use `"type": "module"` in your `package.json` file. For now, you will need this to be present so that you don't run into errors. In subsequent versions/releases we will work on making it work regardless of the type you use in your package.json
 
 #
 
