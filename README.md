@@ -188,7 +188,7 @@ npm install -D @build-in-blocks/dev.setup
       # -----------------------------------------------------------------
       # This points to the shared library repository's "central" workflow
       # -----------------------------------------------------------------
-      uses: build-in-blocks/dev.setup/.github/workflows/central-blocks-ci.yml@v1.0.1
+      uses: build-in-blocks/dev.setup/.github/workflows/central-blocks-ci.yml@v1.0.2
       with:
         run_tests: true
         # -------------------------------------------------
