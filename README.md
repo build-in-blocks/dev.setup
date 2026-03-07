@@ -77,7 +77,7 @@ npm install -D @build-in-blocks/dev.setup
   npm install -D prettier@^3.8.1 eslint-config-prettier@^10.1.8
   ````
 
-- Create a `prettier.config.js` file at root of your project and add this setup:
+- Create a `prettier.config.mjs` file at root of your project and add this setup:
 
   ````
   import basePrettier from '@build-in-blocks/dev.setup/prettier';
@@ -89,7 +89,6 @@ npm install -D @build-in-blocks/dev.setup
     ...basePrettier,
   };
   ````
-- Use `"type": "module"` in your `package.json` file. If you don't use it, you may run into errors as shown in the **troubleshooting** section at the end of this installation guide.
 
 #### 4. Husky + lint-staged installation and setup
 
@@ -226,7 +225,6 @@ Make sure to add and commit all your setup files to git, and push/merge it to yo
 #### 9. Troubleshooting
 
 - **Eslint + typescript intellisense:** If the `eslint` + `typescript` intellisense is not showing red and yellow wiggle lines in your file, first check that you have `eslint` extension installed in your code editor (that is, if you are using VScode). If you have the extension and it still doesn't show up, closing and reopening your code editor (or just the file you are editing) may fix it.
-- **prettier --write: Warning: Failed to load the ES module**: To solve this, use `"type": "module"` in your `package.json` file. For now, you will need this to be present so that you don't run into errors. In subsequent versions/releases we will work on making it work regardless of the type you use in your package.json
 
 #
 
