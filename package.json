@@ -1,7 +1,7 @@
 {
   "name": "@build-in-blocks/dev.setup",
-  "version": "1.0.0",
-  "description": "Code linting, formatting, pre-commit hook and GitHub actions (including node version compatiblity check) development environment setup for your typescript code repository",
+  "version": "1.0.1",
+  "description": "Code linting, formatting, pre-commit hook and GitHub Actions Continuous Integration (CI) (including node version compatiblity check) development environment setup for your typescript code repository",
   "type": "module",
   "main": "eslint.config.mjs",
   "bin": {
@@ -44,6 +44,13 @@
     "Find list of contributors in project README: https://github.com/build-in-blocks/dev.setup?tab=readme-ov-file#contributors"
   ],
   "keywords": [
+    "@build-in-blocks",
+    "@build-in-blocks/dev.setup",
+    "dev.setup",
+    "blocks",
+    "framework",
+    "library",
+    "package",
     "eslint",
     "prettier",
     "husky",
@@ -57,7 +64,9 @@
     "node",
     "config",
     "setup",
-    "dev environment"
+    "dev environment",
+    "ci",
+    "continuous integration"
   ],
   "files": [
     "bin/",
