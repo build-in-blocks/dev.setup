@@ -1,14 +1,24 @@
 # @build-in-blocks/dev.setup
 
-**Supported Node.js versions:** Node.js v20.x, v22.x, v24.x and v25.x
+![Latest Version](https://img.shields.io/npm/v/@build-in-blocks/dev.setup.svg?label=latest&color=brightgreen&style=flat-square) ![NPM Downloads](https://img.shields.io/npm/d18m/%40build-in-blocks%2Fdev.setup?color=blue&label=downloads%20(last%2018%20months)) ![build passing](https://img.shields.io/badge/build-passing-brightgreen?style=flat-square)
+
+[![License: AGPL v3.0](https://img.shields.io/badge/license-AGPL%20v3.0-blue.svg?style=flat-square)](https://www.gnu.org/licenses/agpl-3.0) [![All Contributors](https://img.shields.io/github/all-contributors/build-in-blocks/dev.setup?color=ee8449&style=flat-square)](#contributors) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/build-in-blocks/dev.setup/blob/develop/docs.contributors/README.md)
 
 #
 
-**Description:** Code linting, formatting, pre-commit hook and GitHub actions development environment setup for your `typescript` code repository.
+**Built with:** Node.js v24.0.2
 
 #
 
-**How it works:** Using code quality checks from `eslint`, `husky` works with `lint-staged` to prevent code that don't meet your code quality requirements, from being commited to git and pushed to your repository's remote - it also formats your code with `prettier` based on your code formatting preferences at this point. `GitHub Actions` then runs the code quality and node version compatibilty checks on pull requests, on push or on merge to your repository's `develop` and/or `main` branch. Ensuring code from all code contributors working on your project pass through the quality checks that you've configured.
+**Supported Node.js versions:** Node.js v20.x, v22.x, v24.x and v25.x - Monitored by (internal) central Blocks CI
+
+#
+
+**Overview:** Code linting, formatting, pre-commit hook and GitHub actions development environment setup for your `typescript` code repository.
+
+#
+
+**Description:** **@build-in-blocks/dev.setup** provides TS development environment setup and comes with preconfigured settings. It helps to automate code compatibilty, quality and formatting checks within your typescript code repository's Git workflow, ensuring that only clean, consistent code is committed to the repository. It also includes GitHub Actions Continuous Integration (CI) setup for running these checks on the contributions submitted to your repository, by your open source contributors or work colleagues. Of course, you can configure it to use your preferred settings too.
 
 #
 
@@ -230,7 +240,7 @@ Make sure to add and commit all your setup files to git, and push/merge it to yo
 
 ### Contributors
 
-[![All Contributors](https://img.shields.io/github/all-contributors/build-in-blocks/dev.setup?color=ee8449&style=flat-square)](#contributors) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/build-in-blocks/dev.setup/blob/develop/docs.contributors/README.md) [![License: AGPL v3.0](https://img.shields.io/badge/License-AGPL%20v3.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+Thanks to these amazing contributors to the **@build-in-blocks/dev.setup** project. This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. See [emoji key](https://allcontributors.org/docs/en/emoji-key). Contributions of any kind welcome!
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->

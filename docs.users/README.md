@@ -61,8 +61,8 @@ In addition to `prettier`'s default settings, our preconfigured settings tells `
 
 ### Preconfigured Husky + lint-staged settings
 
-- Run `eslint` and `prettier` anytime a developer tries to commit code to git.
-- Prevent code commit to git when any of the code linting and formatting requirements are not met.
+- Runs `eslint` and `prettier` anytime a developer tries to commit code to git.
+- Prevents code commit to git when any of the code linting and formatting requirements are not met.
 
 # 
 
