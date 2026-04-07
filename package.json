@@ -17,7 +17,7 @@
   },
   "scripts": {
     "eslint:lint": "eslint .",
-    "prettier:format": "prettier --write \"**/*.{js,ts,css,html}\"",
+    "prettier:format": "prettier --write \"**/*.{mjs,ts,js,html,css,scss}\"",
     "prepare": "husky"
   },
   "dependencies": {

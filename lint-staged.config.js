@@ -1,5 +1,5 @@
 export default {
-  '*.{js,jsx,ts,tsx}': [
+  '*.{mjs,ts,js}': [
     // Formats script file types
     'eslint --fix',
     'prettier --write',
