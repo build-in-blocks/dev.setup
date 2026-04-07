@@ -4,13 +4,16 @@
 # 2. Allow directories
 !*/
 
-# 3. Specifically allow these FOUR types
-!*.js
+# 3. Specifically allow these SIX types
+!*.mjs
 !*.ts
-!*.css
+!*.js
 !*.html
+!*.css
+!*.scss
 
 # 4. Standard ignores
+.build-in-blocks/
 node_modules/
 build/
 dist/
