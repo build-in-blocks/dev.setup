@@ -55,7 +55,7 @@ npm install -D @build-in-blocks/dev.setup
 
   // NOTE: Change folder name to where your ts files reside
   const TARGET_FOLDER = 'src';
-  const TARGET_FILES = `${TARGET_FOLDER}/**/*.{ts,js,tsx}`;
+  const TARGET_FILES = `${TARGET_FOLDER}/**/*.{mjs,ts,js}`;
 
   export default defineConfig([
     //------------------------------------------------------------------

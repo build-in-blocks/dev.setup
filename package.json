@@ -17,7 +17,7 @@
   },
   "scripts": {
     "eslint:lint": "eslint .",
-    "prettier:format": "prettier --write \"**/*.{mjs,js,ts,json,html,css,scss}\"",
+    "prettier:format": "prettier --write \"**/*.{mjs,ts,js,json,html,css,scss}\"",
     "prepare": "node ./bin/pkg.internal.cli.js dev:husky:setup:git"
   },
   "dependencies": {
