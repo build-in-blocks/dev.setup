@@ -15,6 +15,7 @@ const prettier = resolveBin({ pkgName: 'prettier', binRelativePath: 'bin/prettie
 // Automatically detect the user's config file
 //--------------------------------------------
 const userEslintConfig = path.resolve(userAppRoot, 'eslint.config.mjs');
+const userPrettierConfig = path.resolve(userAppRoot, 'prettier.config.mjs');
 
 export default {
     '*.{mjs,js,ts}': [
@@ -22,9 +23,9 @@ export default {
         // Using absolute paths to binaries to avoid ENOENT
         //-------------------------------------------------
         `${eslint} --config "${userEslintConfig}" --fix --no-warn-ignored`,
-        `${prettier} --write`
+        `${prettier} ${userPrettierConfig} --write --ignore-unknown`
     ],
     '*.{json,html,css,scss}': [
-        `${prettier} --write`
+        `${prettier} ${userPrettierConfig} --write --ignore-unknown`
     ]
 };
