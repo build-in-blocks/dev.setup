@@ -1,4 +1,3 @@
-
 import { createRequire } from 'module';
 import blocksDevSetupBaseConfig from '../eslint.config.mjs';
 
@@ -11,4 +10,3 @@ const eslintConfigPath = require.resolve('eslint/config');
 const { defineConfig } = require(eslintConfigPath);
 
 export { defineConfig, blocksDevSetupBaseConfig };
-//
