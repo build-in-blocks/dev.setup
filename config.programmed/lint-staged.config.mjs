@@ -17,17 +17,15 @@ const prettier = resolveBin({ pkgName: 'prettier', binRelativePath: 'bin/prettie
 const userEslintConfig = path.resolve(userAppRoot, 'eslint.config.mjs');
 const userPrettierConfig = path.resolve(userAppRoot, 'prettier.config.mjs');
 
-// console.log(userAppRoot, prettier)
-
 export default {
     '*.{mjs,js,ts}': [
         //-------------------------------------------------
         // Using absolute paths to binaries to avoid ENOENT
         //-------------------------------------------------
         `${eslint} --config "${userEslintConfig}" --fix --no-warn-ignored`,
-        `${prettier} --config ${userPrettierConfig} --write --ignore-unknown`
+        `${prettier} --config "${userPrettierConfig}" --write --ignore-unknown`
     ],
     '*.{json,html,css,scss}': [
-        `${prettier} --config ${userPrettierConfig} --write --ignore-unknown`
+        `${prettier} --config "${userPrettierConfig}" --write --ignore-unknown`
     ]
 }
