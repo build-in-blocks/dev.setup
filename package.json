@@ -3,24 +3,21 @@
   "version": "1.0.2",
   "description": "Code linting, formatting, pre-commit hook and GitHub Actions Continuous Integration (CI) (including node version compatiblity check) development environment setup for your typescript code repository",
   "type": "module",
-  "main": "eslint.config.mjs",
+  "main": "config.programmed/eslint.helper.mjs",
   "bin": {
     "@build-in-blocks/dev.setup": "bin/pkg.internal.cli.js",
-    "blocks.pkg.dev.setup": "bin/pkg.internal.cli.js",
-    "husky-ls-config-init": "bin/user-app.husky.lint-staged.js",
-    "internal-husky-ls-init": "bin/internal.husky.lint-staged.js"
+    "blocks.pkg.dev.setup": "bin/pkg.internal.cli.js"
   },
   "exports": {
-    ".": "./eslint.config.mjs",
-    "./prettier": "./prettier.config.mjs",
-    "./config": "./config.programmed/eslint.helper.mjs"
+    ".": "./config.programmed/eslint.helper.mjs",
+    "./prettier": "./prettier.config.mjs"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "eslint:lint": "eslint .",
-    "prettier:format": "prettier --write \"**/*.{js,ts,css,html}\"",
+    "prettier:format": "prettier --write \"**/*.{mjs,js,ts,json,html,css,scss}\"",
     "prepare": "node ./bin/pkg.internal.cli.js dev:husky:setup:git"
   },
   "dependencies": {
@@ -43,7 +40,7 @@
   },
   "license": "AGPL-3.0",
   "author": "Mary Obiagba",
-    "contributors": [
+  "contributors": [
     "Find list of contributors in project README: https://github.com/build-in-blocks/dev.setup?tab=readme-ov-file#contributors"
   ],
   "keywords": [
@@ -78,7 +75,6 @@
     "config.root/",
     "eslint.config.mjs",
     "prettier.config.mjs",
-    "lint-staged.config.js",
     "README.md"
   ]
 }
