@@ -12,8 +12,6 @@ const userAppArg = {
   internalLint: 'dev:internal:lint',
 };
 
-// test
-
 const args_ = process.argv.slice(2);
 const command = args_[0];
 
