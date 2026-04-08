@@ -1,14 +1,24 @@
 # @build-in-blocks/dev.setup
 
-**Supported Node.js versions:** Node.js v20.x, v22.x, v24.x and v25.x
+![Latest Version](https://img.shields.io/npm/v/@build-in-blocks/dev.setup.svg?label=latest&color=brightgreen&style=flat-square) ![NPM Downloads](https://img.shields.io/npm/d18m/%40build-in-blocks%2Fdev.setup?color=blue&label=downloads%20(last%2018%20months)) ![build passing](https://img.shields.io/badge/build-passing-brightgreen?style=flat-square)
+
+[![License: AGPL v3.0](https://img.shields.io/badge/license-AGPL%20v3.0-blue.svg?style=flat-square)](https://www.gnu.org/licenses/agpl-3.0) [![All Contributors](https://img.shields.io/github/all-contributors/build-in-blocks/dev.setup?color=ee8449&style=flat-square)](#contributors) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/build-in-blocks/dev.setup/blob/develop/docs.contributors/README.md)
 
 #
 
-**Description:** Code linting, formatting, pre-commit hook and GitHub actions development environment setup for your `typescript` code repository.
+**Built with:** Node.js v24.0.2
 
 #
 
-**How it works:** Using code quality checks from `eslint`, `husky` works with `lint-staged` to prevent code that don't meet your code quality requirements, from being commited to git and pushed to your repository's remote - it also formats your code with `prettier` based on your code formatting preferences at this point. `GitHub Actions` then runs the code quality and node version compatibilty checks on pull requests, on push or on merge to your repository's `develop` and/or `main` branch. Ensuring code from all code contributors working on your project pass through the quality checks that you've configured.
+**Supported Node.js versions:** Node.js v20.x, v22.x, v24.x and v25.x - Monitored by (internal) central Blocks CI
+
+#
+
+**Overview:** Code linting, formatting, pre-commit hook and GitHub actions development environment setup for your `typescript` code repository.
+
+#
+
+**Description:** **@build-in-blocks/dev.setup** provides TS development environment setup and comes with preconfigured settings. It helps to automate code compatibilty, quality and formatting checks within your typescript code repository's Git workflow, ensuring that only clean, consistent code is committed to the repository. It also includes GitHub Actions Continuous Integration (CI) setup for running these checks on the contributions submitted to your repository, by your open source contributors or work colleagues. Of course, you can configure it to use your preferred settings too.
 
 #
 
@@ -31,87 +41,89 @@
 
 #### 1. Main package installation
 
-Install our dev setup in your project:
+Install our dev setup package as a `devDependency` in your project:
 
 ````
 npm install -D @build-in-blocks/dev.setup
 ````
 
-#### 2. Eslint with typescript installation and setup
+#### 2. When to install `typescript`
 
-- Install the same group of eslint-related and typescript-related package versions that our dev setup uses in your project:
+If you are using both this library and [@build-in-blocks/dev.build](https://www.npmjs.com/package/@build-in-blocks/dev.build) together in your project, then you don't need to install `typescript` in your project (the **@build-in-blocks/dev.build** library already does that internally, relative to your project). 
 
-  ````
-  npm install -D eslint@^10.0.2 @eslint/js@^10.0.1 typescript@^5.9.3 typescript-eslint@^8.56.1
-  ````
+Otherwise, you'll need to manually install `typescript` in your project. See `typescript` table in the general guide for more information: [Typescript compatibility and usage](https://github.com/build-in-blocks/.github/wiki/Repo-User-Guide-Extension#table-typescript-compatibility-and-usage).
 
-- Create a `eslint.config.mjs` file at root of your project and add this setup:
-
-  ````
-  // @ts-check
-
-  import { defineConfig } from 'eslint/config';
-  import blocksDevSetupConfig from '@build-in-blocks/dev.setup';
-
-  // NOTE: Change folder name to where your ts files reside
-  const TARGET_FOLDER = 'src';
-  const TARGET_FILES = `${TARGET_FOLDER}/**/*.{mjs,ts,js}`;
-
-  export default defineConfig([
-    //------------------------------------------------------------------
-    // USE OUR PRECONFIGURED SETTINGS & UPDATE IT WITH YOUR TARGET FILES
-    //------------------------------------------------------------------
-    blocksDevSetupConfig.map(config => ({
-      ...config,
-      files: [TARGET_FILES],
-    })),
-  ]);
-  ````
+#### 3. Eslint config setup
 
 
-#### 3. Prettier installation and setup
+Create a `eslint.config.mjs` file at root of your project and add this setup:
 
-- Install the same group of prettier-related package versions that our dev setup uses in your project:
+````
+// @ts-check
 
-  ````
-  npm install -D prettier@^3.8.1 eslint-config-prettier@^10.1.8
-  ````
+import { defineConfig, blocksDevSetupBaseConfig } from '@build-in-blocks/dev.setup';
 
-- Create a `prettier.config.mjs` file at root of your project and add this setup:
+//-------------------------------------------------------
+// NOTE: Change folder name to where your ts files reside
+//-------------------------------------------------------
+const TARGET_FOLDER = 'src';
+const TARGET_FILES = `${TARGET_FOLDER}/**/*.{mjs,ts,js}`;
 
-  ````
-  import basePrettier from '@build-in-blocks/dev.setup/prettier';
+export default defineConfig([
+  //------------------------------------------------------------------
+  // USE OUR PRECONFIGURED SETTINGS & UPDATE IT WITH YOUR TARGET FILES
+  //------------------------------------------------------------------
+  blocksDevSetupBaseConfig.map((/** @type {any} */ config) => ({
+    ...config,
+    files: [TARGET_FILES],
+  })),
+]);
+````
 
-  export default {
-    //-------------------------------
-    // USE OUR PRECONFIGURED SETTINGS
-    //-------------------------------
-    ...basePrettier,
-  };
-  ````
 
-#### 4. Husky + lint-staged installation and setup
+#### 4. Prettier installation and setup
+
+Create a `prettier.config.mjs` file at root of your project and add this setup:
+
+````
+import basePrettier from '@build-in-blocks/dev.setup/prettier';
+
+export default {
+  //-------------------------------
+  // USE OUR PRECONFIGURED SETTINGS
+  //-------------------------------
+  ...basePrettier,
+};
+````
+
+#### 5. Husky + lint-staged initial setup
 
 > [!NOTE]  
 > **Before you proceed with husky setup:** Your project must be a git repository, and you must have made at least one commit to git. If you have done that already, then proceed to follow the husky-related step below. If it's not a git repository, first run the `git init` command at the root of your project to initialize it as a git repository, add and commit one or more files to git as needed, then proceed to follow the husky-related steps below.
 
-- Install the same husky and lint-staged package versions that our dev setup uses in your project:
+- Add this prepare script to your `package.json` scripts:
 
   ````
-  npm i -D husky@^9.1.7 lint-staged@^16.3.2
+  "scripts": {
+    "prepare": "npx @build-in-blocks/dev.setup@1.0.3 dev:husky:setup:git"
+    // your other npm scripts in your project goes here as usual
+  },
   ````
 
-- Initialize husky and lint-staged:
+  > [!IMPORTANT]  
+  > About `@build-in-blocks/dev.setup@[VERSION_NUMBER_HERE]` in the script: Make sure the version number used your in your `prepare` script is the same as the version of the `@build-in-blocks/dev.setup` package in your `package.json` file's `devDependencies`.
+
+- Initialize husky and lint-staged by running this script command:
 
   ````
-  npx husky-ls-config-init
+  npm run prepare
   ````
 
   > [!NOTE]  
-  > After doing the above, husky will automatically add the `"prepare": "husky"` npm script command to your `package.json` file. Do not remove this script command, this is what husky will use to automate the process.
+  > After doing the above, husky will add the `.husky` folder with content including the `pre-commit` file. Make sure to add and commit this `pre-commit` file to git.
 
 
-#### 5. Git commit test - Check that what you've setup so far works
+#### 6. Git commit test - Check that what you've setup so far works
 
 - **Add this incorrectly formatted code:** Create a `.ts` file (in the `TARGET_FOLDER` that you specified in your eslint config i.e. `src` folder in this case). Copy and paste this sample code (just as it is) into the `.ts` file (don't make any corrections to the code):
 
@@ -143,14 +155,14 @@ npm install -D @build-in-blocks/dev.setup
 - **Eslint + typescript intellisense:** Additinally, you should already be able to see `eslint` + `typescript` intellisense working in your code editor i.e. red and yellow wiggly lines in the new `.ts` file - that is `eslint` notifying you about the code quality-related errors and warnings present in the code. If the intellisense isn't showing for you, see the **troubleshooting** section at the end of this installation guide.
 
 
-#### 6. Running Eslint and prettier manually without husky
+#### 7. Running Eslint and prettier manually without husky
 
 - Add eslint and prettier script commands to your scripts in your project's `package.json` file:
 
   ````
   "scripts": {
     "eslint:lint": "eslint .",
-    "prettier:format": "prettier --write \"**/*.{js,ts,css,html}\""
+    "prettier:format": "prettier --write \"**/*.{mjs,ts,js,json,html,css,scss}\"",
     // your other npm scripts in your project goes here as usual
   },
   ````
@@ -171,7 +183,7 @@ npm install -D @build-in-blocks/dev.setup
     ````
 
 
-#### 7. GitHub Actions setup
+#### 8. GitHub Actions setup
 
 - Add `.github/workflows/blocks-ci.yml` file in your project, and paste the workflow code below into the file:
 
@@ -217,20 +229,20 @@ npm install -D @build-in-blocks/dev.setup
   > You can update the name of the branches in the `.yml` file, remove or add as you see fit, based on what branch names your repository uses.
 
 
-#### 8. Extra notes
+#### 9. Extra notes
 
 Make sure to add and commit all your setup files to git, and push/merge it to your remote on GitHub. Once you do this, any contributor who clones your project's repository (or pull these new changes) will automatically have these settings work for them. All they have to do is clone the repository and install the packages in your project's `package.json` as usual - that's all!
  
 
-#### 9. Troubleshooting
+#### 10. Troubleshooting
 
-- **Eslint + typescript intellisense:** If the `eslint` + `typescript` intellisense is not showing red and yellow wiggle lines in your file, first check that you have `eslint` extension installed in your code editor (that is, if you are using VScode). If you have the extension and it still doesn't show up, closing and reopening your code editor (or just the file you are editing) may fix it.
+**Eslint + typescript intellisense:** If the `eslint` + `typescript` intellisense is not showing red and yellow wiggly lines in your code file, first check that you have `eslint` extension installed in your code editor (that is, if you are using VScode). If you have the extension and it still doesn't show up, closing and reopening your code editor (or just the file you are editing) may fix it.
 
 #
 
 ### Contributors
 
-[![All Contributors](https://img.shields.io/github/all-contributors/build-in-blocks/dev.setup?color=ee8449&style=flat-square)](#contributors) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/build-in-blocks/dev.setup/blob/develop/docs.contributors/README.md) [![License: AGPL v3.0](https://img.shields.io/badge/License-AGPL%20v3.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+Thanks to these amazing contributors to the **@build-in-blocks/dev.setup** project. This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. See [emoji key](https://allcontributors.org/docs/en/emoji-key). Contributions of any kind welcome!
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
