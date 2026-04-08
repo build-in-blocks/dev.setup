@@ -5,4 +5,6 @@ export default {
   trailingComma: 'all',
   semi: true,
   endOfLine: 'lf',
+  printWidth: 350,
+  bracketSpacing: true,
 };
