@@ -5,7 +5,7 @@
 import { fs, path, execSync, process } from '../config.root/external.packages.js';
 import { binPath, __dirname } from '../config.root/root.js';
 
-const internalCommand = '@build-in-blocks/dev.setup@1.0.2';
+const internalCommand = '@build-in-blocks/dev.setup@1.0.3';
 
 const userAppArg = {
   huskyGitSetup: 'dev:husky:setup:git',
@@ -84,9 +84,14 @@ if (pkgArgDetected) {
         [pathKey]: `${internalBinPath}${path.delimiter}${process.env[pathKey]}`,
         NODE_PATH: internalModulesPath,
         NODE_OPTIONS: '--no-warnings',
+        //--------------------------------------------------------------------------
+        // This prevents lint-staged from using its "smart" backup logic which often
+        // causes the "tampering"feel.
+        //--------------------------------------------------------------------------
+        LINT_STAGED_BACKUP: '0',
       };
 
-      execSync(`node "${lintStagedBin}" --config "${configPath}" --no-stash`, {
+      execSync(`node "${lintStagedBin}" --config "${configPath}"`, {
         stdio: 'inherit',
         cwd: userAppRoot,
         env,
