@@ -21,14 +21,14 @@ console.log(prettier)
 const userEslintConfig = path.resolve(userAppRoot, 'eslint.config.mjs');
 const userPrettierConfig = path.resolve(userAppRoot, 'prettier.config.mjs');
 
-console.log(userAppRoot, prettier)
+// console.log(userAppRoot, prettier)
 
 export default {
     '*.{mjs,js,ts}': [
         //-------------------------------------------------
         // Using absolute paths to binaries to avoid ENOENT
         //-------------------------------------------------
-        `${eslint} --config "${userEslintConfig}" --fix --no-warn-ignored`,
+        // `${eslint} --config "${userEslintConfig}" --fix --no-warn-ignored`,
         `${prettier} ${userPrettierConfig} --write --ignore-unknown`
     ],
     '*.{json,html,css,scss}': [
