@@ -47,6 +47,8 @@ In addition to `prettier`'s default settings, our preconfigured settings tells `
 - Add trailing comma to the last item in an object
 - End every single code statement with a semicolon
 - Ensure that every file ends with exactly one empty line
+- Allow e.g. import statements, function arguments etc. to be on straight line without breaking (only wrap to next line if printWidth exceeds 350)
+- Add spaces between brackets in object literals, imports, and similar structures
 
 ````
 {
@@ -56,6 +58,8 @@ In addition to `prettier`'s default settings, our preconfigured settings tells `
   trailingComma: 'all',
   semi: true,
   endOfLine: 'lf',
+  printWidth: 350,
+  bracketSpacing: true,
 };
 ````
 
