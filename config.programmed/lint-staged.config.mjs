@@ -18,14 +18,18 @@ const userEslintConfig = path.resolve(userAppRoot, 'eslint.config.mjs');
 const userPrettierConfig = path.resolve(userAppRoot, 'prettier.config.mjs');
 
 export default {
-    '*.{mjs,js,ts}': [
-        //-------------------------------------------------
-        // Using absolute paths to binaries to avoid ENOENT
-        //-------------------------------------------------
-        `${eslint} --config "${userEslintConfig}" --fix --no-warn-ignored`,
-        `${prettier} --config "${userPrettierConfig}" --write --ignore-unknown`
-    ],
-    '*.{json,html,css,scss}': [
-        `${prettier} --config "${userPrettierConfig}" --write --ignore-unknown`
-    ]
+    '*.{mjs,js,ts}': (filenames) => {
+        // We map the filenames to ensure they are quoted for the shell
+        const files = filenames.join(' ');
+        return [
+            `${eslint} --config "${userEslintConfig}" --fix --no-warn-ignored ${files}`,
+            `${prettier} --config "${userPrettierConfig}" --write --ignore-unknown ${files}`
+        ];
+    },
+    '*.{json,html,css,scss}': (filenames) => {
+        const files = filenames.join(' ');
+        return [
+            `${prettier} --config "${userPrettierConfig}" --write --ignore-unknown ${files}`
+        ];
+    }
 }

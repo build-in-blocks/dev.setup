@@ -2,12 +2,7 @@
 
 /*global console*/
 
-import {
-  fs,
-  path,
-  execSync,
-  process,
-} from '../config.root/external.packages.js';
+import { fs, path, execSync, process } from '../config.root/external.packages.js';
 import { binPath, __dirname } from '../config.root/root.js';
 
 const internalCommand = '@build-in-blocks/dev.setup@1.0.2';
@@ -20,9 +15,7 @@ const userAppArg = {
 const args_ = process.argv.slice(2);
 const command = args_[0];
 
-const pkgArgDetected =
-  args_.length === 1 &&
-  (command === userAppArg.huskyGitSetup || command === userAppArg.internalLint);
+const pkgArgDetected = args_.length === 1 && (command === userAppArg.huskyGitSetup || command === userAppArg.internalLint);
 
 if (pkgArgDetected) {
   //-----------------------------------------------------------------
@@ -78,26 +71,23 @@ if (pkgArgDetected) {
   // Apply linting and formatting on git commit operation
   // ----------------------------------------------------
   if (command === userAppArg.internalLint) {
-    const configPath = path.resolve(
-      engineRoot,
-      'config.programmed/lint-staged.config.mjs',
-    );
+    const configPath = path.resolve(engineRoot, 'config.programmed/lint-staged.config.mjs');
     try {
       //-----------------------------------------------------
       // Check to detect the correct PATH key. Treat the PATH
       // difference between windows OS and other OS.
       //-----------------------------------------------------
-      const pathKey =
-        process.platform === 'win32'
-          ? Object.keys(process.env).find((k) => k.toUpperCase() === 'PATH') ||
-            'PATH'
-          : 'PATH';
+      const pathKey = process.platform === 'win32' ? Object.keys(process.env).find((k) => k.toUpperCase() === 'PATH') || 'PATH' : 'PATH';
 
       const env = {
         ...process.env,
         [pathKey]: `${internalBinPath}${path.delimiter}${process.env[pathKey]}`,
         NODE_PATH: internalModulesPath,
-        NODE_OPTIONS: '--no-warnings',
+        //--------------------------------------------------------
+        // This helps ESM-based configs (like prettier.config.mjs)
+        // resolve their own dependencies from your engine
+        //--------------------------------------------------------
+        NODE_OPTIONS: '--no-warnings --experimental-specifier-resolution=node',
       };
 
       execSync(`node "${lintStagedBin}" --config "${configPath}" --no-stash`, {
