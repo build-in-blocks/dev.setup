@@ -13,7 +13,9 @@ const prettier = resolveBin('prettier', 'bin/prettier.cjs');
 
 export default {
     '*.{mjs,js,ts}': [
-        // We use absolute paths to binaries to avoid ENOENT
+        //-------------------------------------------------
+        // Using absolute paths to binaries to avoid ENOENT
+        //-------------------------------------------------
         `${eslint} --fix --no-warn-ignored`,
         `${prettier} --write`
     ],

@@ -5,14 +5,15 @@
   "type": "module",
   "main": "eslint.config.mjs",
   "bin": {
-    "blocks": "./bin/cli.js",
+    "@build-in-blocks/dev.setup": "bin/pkg.internal.cli.js",
+    "blocks.pkg.dev.setup": "bin/pkg.internal.cli.js",
     "husky-ls-config-init": "bin/user-app.husky.lint-staged.js",
     "internal-husky-ls-init": "bin/internal.husky.lint-staged.js"
   },
   "exports": {
     ".": "./eslint.config.mjs",
     "./prettier": "./prettier.config.mjs",
-    "./config": "./configs/eslint.helper.mjs"
+    "./config": "./config.programmed/eslint.helper.mjs"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -20,7 +21,7 @@
   "scripts": {
     "eslint:lint": "eslint .",
     "prettier:format": "prettier --write \"**/*.{js,ts,css,html}\"",
-    "prepare": "node ./bin/cli.js setup-git"
+    "prepare": "node ./bin/pkg.internal.cli.js dev:husky:setup:git"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
