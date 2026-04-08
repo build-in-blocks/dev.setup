@@ -22,8 +22,15 @@ export default {
     //-------------------------------------------------
     // Using absolute paths to binaries to avoid ENOENT
     //-------------------------------------------------
+    // Formats script file types
+    //--------------------------
     `${eslint} --config "${userEslintConfig}" --fix --no-warn-ignored`,
     `${prettier} --config "${userPrettierConfig}" --write --ignore-unknown`,
   ],
-  '*.{json,html,css,scss}': [`${prettier} --config "${userPrettierConfig}" --write --ignore-unknown`],
+  '*.{json,html,css,scss}': [
+    //-------------------------
+    // Formats other file types
+    //-------------------------
+    `${prettier} --config "${userPrettierConfig}" --write --ignore-unknown`,
+  ],
 };
