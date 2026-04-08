@@ -2,16 +2,15 @@
 
 /*global console*/
 
-import { execSync } from 'child_process';
-import path from 'path';
-import fs from 'fs';
-import process from 'process';
-import { fileURLToPath } from 'url';
-import { createRequire } from 'module';
+import {
+  fs,
+  path,
+  execSync,
+  process,
+} from '../config.root/external.packages.js';
+import { binPath, __dirname } from '../config.root/root.js';
 
-const require = createRequire(import.meta.url);
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const internalCommand = '@build-in-blocks/dev.setup@1.0.2';
 
 const userAppArg = {
   huskyGitSetup: 'dev:husky:setup:git',
@@ -38,17 +37,19 @@ if (pkgArgDetected) {
   // -----------------------------------------------
   // Safely find binary paths for the internal tools
   // -----------------------------------------------
-  const getBinPath = (pkgName, binSubPath) => {
+  const getBinPath = ({ pkgName, binSubPath }) => {
     try {
-      const pkgRoot = path.dirname(require.resolve(`${pkgName}/package.json`));
-      return path.join(pkgRoot, binSubPath);
+      return binPath({ pkgName, binSubPath });
     } catch {
       return path.resolve(internalBinPath, pkgName);
     }
   };
   //-
-  const huskyBin = getBinPath('husky', 'bin.js');
-  const lintStagedBin = getBinPath('lint-staged', 'bin/lint-staged.js');
+  const huskyBin = getBinPath({ pkgName: 'husky', binSubPath: 'bin.js' });
+  const lintStagedBin = getBinPath({
+    pkgName: 'lint-staged',
+    binSubPath: 'bin/lint-staged.js',
+  });
 
   // ---------------------------------------------------------
   // Set up husky to work with git i.e. initially generate the
@@ -63,7 +64,7 @@ if (pkgArgDetected) {
       //-------------------------------------------------------------------------------------
       // Use 'npx @build-in-blocks/[library] [command]' to ensure portability in the User App
       //-------------------------------------------------------------------------------------
-      const hookContent = `npx @build-in-blocks/dev.setup@1.0.2 ${userAppArg.internalLint}`;
+      const hookContent = `npx ${internalCommand} ${userAppArg.internalLint}`;
 
       fs.writeFileSync(preCommitPath, hookContent, { mode: 0o755 });
 
@@ -99,7 +100,7 @@ if (pkgArgDetected) {
         NODE_OPTIONS: '--no-warnings',
       };
 
-      execSync(`node "${lintStagedBin}" --config "${configPath}"`, {
+      execSync(`node "${lintStagedBin}" --config "${configPath}" --no-stash`, {
         stdio: 'inherit',
         cwd: userAppRoot,
         env,
