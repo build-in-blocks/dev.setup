@@ -4,11 +4,14 @@
 # 2. Allow directories
 !*/
 
-# 3. Specifically allow these FOUR types
+# 3. Specifically allow these SEVEN file types
+!*.mjs
 !*.js
 !*.ts
-!*.css
+!*.json
 !*.html
+!*.css
+!*.scss
 
 # 4. Standard ignores
 node_modules/
