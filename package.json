@@ -74,6 +74,8 @@
   ],
   "files": [
     "bin/",
+    "config.programmed/",
+    "config.root/",
     "eslint.config.mjs",
     "prettier.config.mjs",
     "lint-staged.config.js",
