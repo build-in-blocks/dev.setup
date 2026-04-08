@@ -11,3 +11,4 @@ const eslintConfigPath = require.resolve('eslint/config');
 const { defineConfig } = require(eslintConfigPath);
 
 export { defineConfig, blocksDevSetupBaseConfig };
+//
