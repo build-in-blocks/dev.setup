@@ -6,8 +6,8 @@
 
 # 3. Specifically allow these SEVEN file types
 !*.mjs
-!*.js
 !*.ts
+!*.js
 !*.json
 !*.html
 !*.css

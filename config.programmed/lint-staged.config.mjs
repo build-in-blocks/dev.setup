@@ -18,7 +18,7 @@ const userEslintConfig = path.resolve(userAppRoot, 'eslint.config.mjs');
 const userPrettierConfig = path.resolve(userAppRoot, 'prettier.config.mjs');
 
 export default {
-  '*.{mjs,js,ts}': [
+  '*.{mjs,ts,js}': [
     //-------------------------------------------------
     // Using absolute paths to binaries to avoid ENOENT
     //-------------------------------------------------
