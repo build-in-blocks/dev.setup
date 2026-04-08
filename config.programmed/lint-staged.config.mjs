@@ -1,8 +1,6 @@
 import { path, process } from '../config.root/external.packages.js';
 import { binPath } from '../config.root/root.js';
 
-/*global console */
-
 const userAppRoot = process.cwd();
 
   const resolveBin = ({ pkgName, binRelativePath }) => {
@@ -12,8 +10,6 @@ const userAppRoot = process.cwd();
 
 const eslint = resolveBin({ pkgName: 'eslint', binRelativePath: 'bin/eslint.js' });
 const prettier = resolveBin({ pkgName: 'prettier', binRelativePath: 'bin/prettier.cjs' });
-
-console.log(prettier)
 
 //--------------------------------------------
 // Automatically detect the user's config file
@@ -28,10 +24,10 @@ export default {
         //-------------------------------------------------
         // Using absolute paths to binaries to avoid ENOENT
         //-------------------------------------------------
-        // `${eslint} --config "${userEslintConfig}" --fix --no-warn-ignored`,
-        `${prettier} ${userPrettierConfig} --write --ignore-unknown`
+        `${eslint} --config "${userEslintConfig}" --fix --no-warn-ignored`,
+        `${prettier} --config ${userPrettierConfig} --write --ignore-unknown`
     ],
     '*.{json,html,css,scss}': [
-        `${prettier} ${userPrettierConfig} --write --ignore-unknown`
+        `${prettier} --config ${userPrettierConfig} --write --ignore-unknown`
     ]
-};
+}
