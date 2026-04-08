@@ -83,7 +83,11 @@ if (pkgArgDetected) {
         ...process.env,
         [pathKey]: `${internalBinPath}${path.delimiter}${process.env[pathKey]}`,
         NODE_PATH: internalModulesPath,
-        NODE_OPTIONS: '--no-warnings',
+        //--------------------------------------------------------
+        // This helps ESM-based configs (like prettier.config.mjs)
+        // resolve their own dependencies from your engine
+        //--------------------------------------------------------
+        NODE_OPTIONS: '--no-warnings --experimental-specifier-resolution=node',
       };
 
       execSync(`node "${lintStagedBin}" --config "${configPath}" --no-stash`, {
