@@ -11,6 +11,12 @@ User installation and setup instructions can in the [root README.md](https://git
 
 #
 
+### User guide extension
+
+More info on **@build-in-blocks** framework libraries in general can be found at: https://github.com/build-in-blocks/.github/wiki/Repo-User-Guide-Extension
+
+#
+
 ### Preconfigured Eslint alert settings
 
 #### Eslint warnings
@@ -57,8 +63,8 @@ In addition to `prettier`'s default settings, our preconfigured settings tells `
 
 ### Preconfigured Husky + lint-staged settings
 
-- Run `eslint` and `prettier` anytime a developer tries to commit code to git.
-- Prevent code commit to git when any of the code linting and formatting requirements are not met.
+- Runs `eslint` and `prettier` anytime a developer tries to commit code to git.
+- Prevents code commit to git when any of the code linting and formatting requirements are not met.
 
 # 
 
@@ -84,17 +90,19 @@ You can find more detailed guidance in `eslint` and `typescript-eslint` document
 ````
 // @ts-check
 
-import { defineConfig } from 'eslint/config';
-import blocksDevSetupConfig from '@build-in-blocks/dev.setup';
+import { defineConfig, blocksDevSetupBaseConfig } from '@build-in-blocks/dev.setup';
 
-const TARGET_FOLDER = 'src'; // NOTE: Change folder name to where your ts files reside
+//-------------------------------------------------------
+// NOTE: Change folder name to where your ts files reside
+//-------------------------------------------------------
+const TARGET_FOLDER = 'src';
 const TARGET_FILES = `${TARGET_FOLDER}/**/*.{mjs,ts,js}`;
 
 export default defineConfig([
   //---------------------------------------------------------------------------
   // 1. USE OUR PRECONFIGURED SETTINGS & UPDATE IT WITH YOUR TARGET FILES FIRST
   //---------------------------------------------------------------------------
-  blocksDevSetupConfig.map(config => ({
+  blocksDevSetupBaseConfig.map((/** @type {any} */ config) => ({
     ...config,
     files: [TARGET_FILES],
   })),

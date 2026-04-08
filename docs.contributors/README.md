@@ -63,12 +63,12 @@ Follow the instructions to fork and clone this repository locally unto your comp
     Complete the setup for husky and lint-staged:
 
     ````
-    npx internal-husky-ls-init
+    npm run prepare
     ````
 
 - **For your TS app:** Open a terminal specifically for your typescript app, cd into the root of your typescript app.
 
-    - **Step 1:** Follow the installation steps in the [root README.md](https://github.com/build-in-blocks/dev.setup), not from the beginning though; start from the **2. Eslint with typescript installation and setup** section (and continue till the end).
+    - **Step 1:** Follow the installation steps in the [root README.md](https://github.com/build-in-blocks/dev.setup), not from the beginning though; start from the **2. When to install `typescript`** section (and continue till the end).
 
     - **Step 2:** Add this to your app's package.json dependencies (take note incase library version changes in the future: use the exact version number in the `@build-in-blocks/dev.setup` library's package.json. At the time of writing, it is 1.0.0):
 
@@ -82,7 +82,7 @@ Follow the instructions to fork and clone this repository locally unto your comp
         npm link ../dev.setup
         ```
 
-    - **Step 3:** In your code editor, go to any `.ts` file in your app and update as needed. Check that the preconfigured settings specified in [docs.users README.md](https://github.com/build-in-blocks/dev.setup/blob/develop/docs.users/README.md) are applied.
+    - **Step 3:** In your code editor, go to any `.ts`, (`mjs` or  `js`) file in your app and update as needed. Check that the preconfigured settings specified in [docs.users README.md](https://github.com/build-in-blocks/dev.setup/blob/develop/docs.users/README.md) are applied.
 
 #
 
