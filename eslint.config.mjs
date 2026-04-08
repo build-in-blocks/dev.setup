@@ -6,7 +6,7 @@ import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
-export default defineConfig(
+const blocksDevSetupBaseConfig = defineConfig(
   eslint.configs.recommended,
   tseslint.configs.recommended,
   tseslint.configs.stylistic,
@@ -19,3 +19,5 @@ export default defineConfig(
   },
   eslintConfigPrettier,
 );
+
+export default blocksDevSetupBaseConfig;
