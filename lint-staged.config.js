@@ -1,11 +1,11 @@
 export default {
   '*.{mjs,ts,js}': [
     // Formats script file types
-    'eslint --fix',
-    'prettier --write',
+    'blocks-lint --fix',
+    'blocks-format --write',
   ],
   '*.{html,css,scss}': [
     // Formats other file types
-    'prettier --write',
+    'blocks-format --write',
   ],
 };
