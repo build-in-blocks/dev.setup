@@ -111,7 +111,7 @@ export default {
 
   ````
   "scripts": {
-    "prepare": "npx @build-in-blocks/dev.setup@1.0.4 dev:husky:setup:git"
+    "prepare": "npx @build-in-blocks/dev.setup@1.0.4 dev:husky:setup:git",
     // your other npm scripts in your project goes here as usual
   },
   ````
