@@ -44,7 +44,7 @@
 - Install our dev setup package as a `devDependency` in your project:
 
   ````
-  npm install -D @build-in-blocks/dev.setup  --save-exact
+  npm install -D @build-in-blocks/dev.setup --save-exact
   ````
 
 - Also make sure to install the resources package, so that your project's code can compile successfully without errors:
