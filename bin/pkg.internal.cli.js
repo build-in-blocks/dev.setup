@@ -58,7 +58,7 @@ if (pkgArgDetected) {
   // husky folder, with content that includes pre-commit file.
   // ---------------------------------------------------------
   if (command === userAppArg.huskyGitSetup) {
-    console.log('[PREPARING] Setting up @build-in-blocks git hooks...');
+    console.log('[PREPARING] Setting up husky git hooks...');
     try {
       execSync(`node "${huskyBin}"`, { stdio: 'inherit' });
       const preCommitPath = path.join(userAppRoot, '.husky/pre-commit');
@@ -70,7 +70,7 @@ if (pkgArgDetected) {
 
       fs.writeFileSync(preCommitPath, hookContent, { mode: 0o755 });
 
-      console.log('[SUCCESS] Git hooks integrated successfully.');
+      console.log('[SUCCESS] Husky git hooks integrated successfully.');
     } catch {
       blocksTerminalLogger({
         startLoggerMessageOnNewLine: true,
@@ -79,7 +79,7 @@ if (pkgArgDetected) {
         },
         userApp: {
           fullName: userAppPkgJSON.name,
-          errorMessage: 'Git hook setup failed.',
+          errorMessage: 'Husky git hook setup failed.',
         },
         errorSource: true,
         suggestion: {
