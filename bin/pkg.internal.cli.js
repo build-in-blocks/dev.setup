@@ -3,9 +3,9 @@
 /*global console*/
 
 import { fs, path, execSync, process } from '../config.root/external.packages.js';
-import { binPath, __dirname } from '../config.root/root.js';
+import { __dirname } from '../config.root/root.js';
 
-const internalCommand = '@build-in-blocks/dev.setup@1.0.3';
+const internalCommand = '@build-in-blocks/dev.setup@1.0.4';
 
 const userAppArg = {
   huskyGitSetup: 'dev:husky:setup:git',
@@ -30,19 +30,25 @@ if (pkgArgDetected) {
   // -----------------------------------------------
   // Safely find binary paths for the internal tools
   // -----------------------------------------------
-  const getBinPath = ({ pkgName, binSubPath }) => {
-    try {
-      return binPath({ pkgName, binSubPath });
-    } catch {
-      return path.resolve(internalBinPath, pkgName);
+  const getBinPath = (pkgName) => {
+    //-----------------------------------------------------------------
+    // A. Look in the User App's .bin (Production or hoisted)
+    // B. Look in the Engine's .bin (Development i.e. local npm link)
+    // C. Return the .bin path that match based on environment detected
+    //-----------------------------------------------------------------
+    const paths = [path.resolve(userAppRoot, 'node_modules/.bin', pkgName), path.resolve(engineRoot, 'node_modules/.bin', pkgName)];
+
+    const found = paths.find((p) => fs.existsSync(p));
+
+    if (!found) {
+      throw new Error(`Binary for ${pkgName} not found. Try 'npm install'`);
     }
+
+    return found;
   };
-  //-
-  const huskyBin = getBinPath({ pkgName: 'husky', binSubPath: 'bin.js' });
-  const lintStagedBin = getBinPath({
-    pkgName: 'lint-staged',
-    binSubPath: 'bin/lint-staged.js',
-  });
+
+  const huskyBin = getBinPath('husky');
+  const lintStagedBin = getBinPath('lint-staged');
 
   // ---------------------------------------------------------
   // Set up husky to work with git i.e. initially generate the
