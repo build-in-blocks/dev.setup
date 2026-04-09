@@ -105,7 +105,7 @@ export default {
 
   ````
   "scripts": {
-    "prepare": "npx @build-in-blocks/dev.setup@1.0.3 dev:husky:setup:git"
+    "prepare": "npx @build-in-blocks/dev.setup@1.0.4 dev:husky:setup:git"
     // your other npm scripts in your project goes here as usual
   },
   ````
@@ -200,7 +200,7 @@ export default {
       # -----------------------------------------------------------------
       # This points to the shared library repository's "central" workflow
       # -----------------------------------------------------------------
-      uses: build-in-blocks/dev.setup/.github/workflows/central-blocks-ci.yml@v1.0.3
+      uses: build-in-blocks/dev.setup/.github/workflows/central-blocks-ci.yml@v1.0.4
       with:
         run_tests: true
         # -------------------------------------------------
