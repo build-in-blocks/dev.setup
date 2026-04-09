@@ -41,11 +41,17 @@
 
 #### 1. Main package installation
 
-Install our dev setup package as a `devDependency` in your project:
+- Install our dev setup package as a `devDependency` in your project:
 
-````
-npm install -D @build-in-blocks/dev.setup
-````
+  ````
+  npm install -D @build-in-blocks/dev.setup  --save-exact
+  ````
+
+- Also make sure to install the resources package, so that your project's code can compile successfully without errors:
+  
+  ````
+  npm install -D @build-in-blocks/dev.resources --save-exact
+  ````
 
 #### 2. When to install `typescript`
 
