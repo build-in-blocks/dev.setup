@@ -3,7 +3,8 @@
 /*global console*/
 
 import { fs, path, execSync, process } from '../config.root/external.packages.js';
-import { __dirname } from '../config.root/root.js';
+import { blocksTerminalLogger } from '../config.root/blocks.packages.js';
+import { internalPkgJSON, __dirname } from '../config.root/root.js';
 
 const internalCommand = '@build-in-blocks/dev.setup@1.0.4';
 
@@ -23,6 +24,8 @@ if (pkgArgDetected) {
   // this library, or the web app that this library is used in).
   //-----------------------------------------------------------------
   const userAppRoot = process.cwd();
+  const userAppPkgJSON = JSON.parse(fs.readFileSync(path.join(userAppRoot, 'package.json'), 'utf-8'));
+  //-
   const engineRoot = path.resolve(__dirname, '..');
   const internalModulesPath = path.resolve(engineRoot, 'node_modules');
   const internalBinPath = path.resolve(internalModulesPath, '.bin');
@@ -55,7 +58,7 @@ if (pkgArgDetected) {
   // husky folder, with content that includes pre-commit file.
   // ---------------------------------------------------------
   if (command === userAppArg.huskyGitSetup) {
-    console.log('🐶 Setting up @build-in-blocks git hooks...');
+    console.log('[PREPARING] Setting up @build-in-blocks git hooks...');
     try {
       execSync(`node "${huskyBin}"`, { stdio: 'inherit' });
       const preCommitPath = path.join(userAppRoot, '.husky/pre-commit');
@@ -67,9 +70,28 @@ if (pkgArgDetected) {
 
       fs.writeFileSync(preCommitPath, hookContent, { mode: 0o755 });
 
-      console.log('✅ Git hooks integrated successfully.');
+      console.log('[SUCCESS] Git hooks integrated successfully.');
     } catch {
-      console.error('❌ Git hook setup failed.');
+      blocksTerminalLogger({
+        startLoggerMessageOnNewLine: true,
+        internalPackage: {
+          fullName: internalPkgJSON.name,
+        },
+        userApp: {
+          fullName: userAppPkgJSON.name,
+          errorMessage: 'Git hook setup failed.',
+        },
+        errorSource: true,
+        suggestion: {
+          // prettier-ignore
+          messageList: [
+            '→ [Step 1] Run "git init" at the root of your project to make it a git repository.',
+            '→ [Step 2] Add and commit one or more files to git.',
+            '→ [Step 3] Try the prepare script again, after you\'ve done steps 1 & 2 above.',
+          ],
+        },
+        processExit: true,
+      });
     }
   }
 

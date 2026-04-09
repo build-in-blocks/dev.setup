@@ -29,6 +29,9 @@
     "prettier": "^3.8.1",
     "typescript-eslint": "^8.56.1"
   },
+  "devDependencies": {
+    "@build-in-blocks/dev.resources": "1.0.4"
+  },
   "homepage": "https://github.com/build-in-blocks/dev.setup#readme",
   "bugs": {
     "url": "https://github.com/build-in-blocks/product-issue-reports/issues"

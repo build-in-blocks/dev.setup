@@ -1,4 +1,4 @@
-import { path, fileURLToPath, createRequire } from './external.packages.js';
+import { fs, path, fileURLToPath, createRequire } from './external.packages.js';
 
 // ------------------------------------------------
 // ESM & Resolution Helpers:
@@ -16,6 +16,9 @@ const binPath = ({ pkgName, binSubPath }) => {
   return path.join(_pkgRoot, binSubPath);
 };
 
+const internalProjectRoot = path.join(__dirname, '../', 'package.json');
+const internalPkgJSON = JSON.parse(fs.readFileSync(internalProjectRoot, 'utf-8'));
+
 export {
   //-------------------------------
   // Export global access variables
@@ -26,4 +29,5 @@ export {
   //-
   binPath,
   //-
+  internalPkgJSON,
 };
