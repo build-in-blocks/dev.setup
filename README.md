@@ -107,19 +107,27 @@ export default {
 > [!NOTE]  
 > **Before you proceed with husky setup:** Your project must be a git repository, and you must have made at least one commit to git. If you have done that already, then proceed to follow the husky-related step below. If it's not a git repository, first run the `git init` command at the root of your project to initialize it as a git repository, add and commit one or more files to git as needed, then proceed to follow the husky-related steps below.
 
-- Add this prepare script to your `package.json` scripts:
+- **Add the prepare script:** In your web project's `package.json` file, add the `prepare` script.
 
-  ````
-  "scripts": {
-    "prepare": "npx @build-in-blocks/dev.setup@1.0.4 dev:husky:setup:git",
-    // your other npm scripts in your project goes here as usual
-  },
-  ````
+  - For `macOS` and `linux`, use:
 
-  > [!IMPORTANT]  
-  > About `@build-in-blocks/dev.setup@[VERSION_NUMBER_HERE]` in the script: Make sure the version number used your in your `prepare` script is the same as the version of the `@build-in-blocks/dev.setup` package in your `package.json` file's `devDependencies`.
+    ````
+    "scripts": {
+      "prepare": "blocks.pkg.dev.setup dev:husky:setup:git"
+      // your other npm scripts in your project goes here as usual
+    },
+    ````
 
-- Initialize husky and lint-staged by running this script command:
+  - For `windows OS`, use:
+
+    ````
+    "scripts": {
+      "prepare": "blocks.pkg.dev.setup.cmd dev:husky:setup:git"
+      // your other npm scripts in your project goes here as usual
+    },
+    ````
+
+- **Init git hooks:** Initialize `husky` and `lint-staged` git hooks by running this script command:
 
   ````
   npm run prepare

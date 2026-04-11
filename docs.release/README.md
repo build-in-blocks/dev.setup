@@ -13,25 +13,8 @@
 
 #### This library
 
-- Change version number in `pkg.internal.cli.js` and `pre-commit` files.
-- In the **root README** always remember to change version number:
-  - In `@build-in-blocks/dev.setup@[VERSION_NUMBER]` for the npm scripts part of the docs too, as you bump up the `package.json` version.
-  - For the .yml file's `call-shared-logic` in `uses: build-in-blocks/dev.setup/.github/workflows/central-blocks-ci.yml@v[VERSION_NUMBER_HERE]`.
+- In the **root README** always remember to change version number for the .yml file's `call-shared-logic` in `uses: build-in-blocks/dev.setup/.github/workflows/central-blocks-ci.yml@v[VERSION_NUMBER_HERE]`, to match with that the version bump for `package.json`.
 - You may want to use your code editor's global search to ensure that there are no other places that need this version number change.
-
-
-#
-
-#### Connected user apps
-
-- Before release (of your "user app" i.e. especially if it's a web library to be published), you always have to check that npx is referencing the correct/updated version in the scripts section of the package.json e.g. @1.0.0 in this case.
-
-    ````
-    "scripts": {
-      "prepare": "npx @build-in-blocks/dev.setup@1.0.0 dev:husky:setup:git"
-        // your other npm scripts in your project goes here as usual
-    },
-    ````
 
 #
 
