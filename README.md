@@ -166,7 +166,7 @@ export default {
 
 - **Check that prettier formats code on commit:** Only fix the eslint errors shown in your terminal, leave any other inconsistent formatting. Add and commit your `.ts` file to git. You should see that the code in the file(s) commited to git has been formatted properly by `prettier`, and the commit is also successful.
 
-- **Eslint + typescript intellisense:** Additinally, you should already be able to see `eslint` + `typescript` intellisense working in your code editor i.e. red and yellow wiggly lines in the new `.ts` file - that is `eslint` notifying you about the code quality-related errors and warnings present in the code. If the intellisense isn't showing for you, see the **troubleshooting** section at the end of this installation guide.
+- **Eslint + typescript intellisense:** Additionally, you should already be able to see `eslint` + `typescript` intellisense working in your code editor i.e. red and yellow wiggly lines in the new `.ts` file - that is `eslint` notifying you about the code quality-related errors and warnings present in the code. If the intellisense isn't showing for you, see the **troubleshooting** section at the end of this installation guide.
 
 
 #### 7. Running Eslint and prettier manually without husky
@@ -250,7 +250,8 @@ Make sure to add and commit all your setup files to git, and push/merge it to yo
 
 #### 10. Troubleshooting
 
-**Eslint + typescript intellisense:** If the `eslint` + `typescript` intellisense is not showing red and yellow wiggly lines in your code file, first check that you have `eslint` extension installed in your code editor (that is, if you are using VScode). If you have the extension and it still doesn't show up, closing and reopening your code editor (or just the file you are editing) may fix it.
+- **Eslint + typescript intellisense -** If the `eslint` + `typescript` intellisense is not showing red and yellow wiggly lines in your code file, first check that you have `eslint` extension installed in your code editor (that is, if you are using VScode). If you have the extension and it still doesn't show up, closing and reopening your code editor (or just the file you are editing) may fix it.
+- **Git hooks not working on commit?** For example, if you have unused variable(s) in a code file that you've added to git, the expectation is that `husky` will prevent committing the file to git. If it happens that it doesn't pass this basic expectation, there's a problem. Upgrade your code editor (if new updates are available), and restart your code editor. Next, run the `npm run prepare` command again, then attempt to commit the file to git.
 
 #
 
