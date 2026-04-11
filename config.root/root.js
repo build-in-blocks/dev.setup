@@ -1,4 +1,4 @@
-import { fs, path, fileURLToPath, createRequire } from './external.packages.js';
+import { fs, path, fileURLToPath, createRequire, process } from './external.packages.js';
 
 // ------------------------------------------------
 // ESM & Resolution Helpers:
@@ -19,6 +19,9 @@ const binPath = ({ pkgName, binSubPath }) => {
 const internalProjectRoot = path.join(__dirname, '../', 'package.json');
 const internalPkgJSON = JSON.parse(fs.readFileSync(internalProjectRoot, 'utf-8'));
 
+const isWindowsOS = process.platform === 'win32';
+const windowsCmdextension = '.cmd';
+
 export {
   //-------------------------------
   // Export global access variables
@@ -30,4 +33,7 @@ export {
   binPath,
   //-
   internalPkgJSON,
+  //-
+  isWindowsOS,
+  windowsCmdextension,
 };
