@@ -4,9 +4,9 @@
 
 import { fs, path, execSync, process } from '../config.root/external.packages.js';
 import { blocksTerminalLogger } from '../config.root/blocks.packages.js';
-import { internalPkgJSON, __dirname } from '../config.root/root.js';
+import { internalPkgJSON, __dirname, isWindowsOS, windowsCmdextension } from '../config.root/root.js';
 
-const internalCommand = '@build-in-blocks/dev.setup@1.0.4';
+const internalCommand = 'blocks.pkg.dev.setup';
 
 const userAppArg = {
   huskyGitSetup: 'dev:husky:setup:git',
@@ -60,13 +60,14 @@ if (pkgArgDetected) {
   if (command === userAppArg.huskyGitSetup) {
     console.log('[PREPARING] Setting up husky git hooks...');
     try {
-      execSync(`node "${huskyBin}"`, { stdio: 'inherit' });
+      const huskyInitCmd = isWindowsOS ? `husky${windowsCmdextension}` : `node "${huskyBin}"`; // This check makes it compatible with Windows OS (in production)
+      execSync(huskyInitCmd, { stdio: 'inherit' });
       const preCommitPath = path.join(userAppRoot, '.husky/pre-commit');
 
-      //-------------------------------------------------------------------------------------
-      // Use 'npx @build-in-blocks/[library] [command]' to ensure portability in the User App
-      //-------------------------------------------------------------------------------------
-      const hookContent = `npx ${internalCommand} ${userAppArg.internalLint}`;
+      //-------------------------------------------------------------------------
+      // Use the (original) internalCommand to ensure portability in the User App
+      //-------------------------------------------------------------------------
+      const hookContent = `${internalCommand} ${userAppArg.internalLint}`;
 
       fs.writeFileSync(preCommitPath, hookContent, { mode: 0o755 });
 
@@ -105,7 +106,7 @@ if (pkgArgDetected) {
       // Check to detect the correct PATH key. Treat the PATH
       // difference between windows OS and other OS.
       //-----------------------------------------------------
-      const pathKey = process.platform === 'win32' ? Object.keys(process.env).find((k) => k.toUpperCase() === 'PATH') || 'PATH' : 'PATH';
+      const pathKey = isWindowsOS ? Object.keys(process.env).find((k) => k.toUpperCase() === 'PATH') || 'PATH' : 'PATH';
 
       const env = {
         ...process.env,
@@ -119,7 +120,8 @@ if (pkgArgDetected) {
         LINT_STAGED_BACKUP: '0',
       };
 
-      execSync(`node "${lintStagedBin}" --config "${configPath}"`, {
+      const lintStagedBinCmd = isWindowsOS ? `lint-staged${windowsCmdextension}` : `node "${lintStagedBin}"`; // This check makes it compatible with Windows OS (in production)
+      execSync(`${lintStagedBinCmd} --config "${configPath}"`, {
         stdio: 'inherit',
         cwd: userAppRoot,
         env,

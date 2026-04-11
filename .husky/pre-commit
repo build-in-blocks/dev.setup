@@ -1,1 +1,1 @@
-npx @build-in-blocks/dev.setup@1.0.4 dev:internal:lint
+blocks.pkg.dev.setup dev:internal:lint
