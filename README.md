@@ -214,7 +214,7 @@ export default {
       # -----------------------------------------------------------------
       # This points to the shared library repository's "central" workflow
       # -----------------------------------------------------------------
-      uses: build-in-blocks/dev.setup/.github/workflows/central-blocks-ci.yml@v1.0.4
+      uses: build-in-blocks/dev.setup/.github/workflows/central-blocks-ci.yml@v1.0.5
       with:
         run_tests: true
         # -------------------------------------------------
