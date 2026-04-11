@@ -1,5 +1,5 @@
 
-# User guide: @build-in-blocks/dev.setup package installation, setup and usage
+# User guide: Package installation, setup and usage
 
 **@build-in-blocks/dev.setup** provides TS development environment setup and comes with preconfigured settings. It helps to automate code compatibilty, quality and formatting checks within your typescript code repository's Git workflow, ensuring that only clean, consistent code is committed to the repository. It also includes GitHub Actions Continuous Integration (CI) setup for running these checks on the contributions submitted to your repository, by your open source contributors or work colleagues. Of course, you can configure it to use your preferred settings too.
 
@@ -137,7 +137,7 @@ export default defineConfig([
 
 #### 2. Updating Prettier settings
 
-You can find more detailed guidance in `prettier` documentation. Here's an example of how to make your project use `tabs` with indent of `4`, instead of our "use spaces with index of 2" default:
+You can find more detailed guidance in `prettier` documentation. Here's an example of how to make your project use `tabs` with indent of `4`, instead of our "use spaces with indent of `2`" default:
 
 ````
 import basePrettier from '@build-in-blocks/dev.setup/prettier';
